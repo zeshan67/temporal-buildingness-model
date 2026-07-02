@@ -1,3 +1,6 @@
 scenario_name,agent_type,agent_count,mean_TBI,mean_anchoring_score,mean_thresholding_score,mean_interiority_score,mean_pausing_score,mean_edge_coupling_score,mean_rhythmic_repetition_score,mean_completed_cycles
-conventional_baseline,conventional_vehicle,20,0.0146,0.0,0.0,0.0,0.0205,0.0838,0.0,0.0
-informal_with_anchors,informal_transport,20,0.3531,0.2392,0.3351,0.496,0.0741,0.3166,0.561,28.05
+conventional_baseline,conventional_vehicle,20,0.002,0.0,0.0,0.0,0.0205,0.0,0.0,0.0
+high_pedestrian_intensity,informal_transport,20,0.4496,0.0906,0.428,0.5736,0.0786,0.7842,0.705,35.25
+informal_no_anchors,informal_transport,20,0.358,0.0,0.4796,0.637,0.0895,0.0384,0.8,40.0
+informal_with_anchors,informal_transport,20,0.3251,0.6269,0.1367,0.1804,0.0242,0.6682,0.224,11.2
+regulation_disruption,informal_transport,20,0.3217,0.2073,0.3333,0.4818,0.0764,0.1768,0.554,27.7

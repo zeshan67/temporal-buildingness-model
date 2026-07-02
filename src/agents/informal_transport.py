@@ -94,20 +94,27 @@ class InformalTransport:
 
     def __post_init__(self) -> None:
         """
-        Place the agent at a starting anchor.
+        Place the agent at a starting anchor when anchors exist.
+
+        If no anchors exist, the agent starts in searching mode.
+        This allows the informal_no_anchors scenario to run correctly.
         """
 
         if self.anchor_points:
             starting_anchor = self.rng.choice(self.anchor_points)
             self.current_node = starting_anchor["node_id"]
             self.target_anchor = starting_anchor["anchor_id"]
+            self.state = InformalTransportState.IDLE_AT_ANCHOR.value
+            self.speed = 0.0
+
         else:
             self.current_node = str(self.rng.choice(list(self.graph.nodes)))
+            self.target_anchor = ""
+            self.state = InformalTransportState.SEARCHING_FOR_DEMAND.value
+            self.speed = self.slow_speed
 
         self.route = [self.current_node]
         self.route_index = 0
-        self.state = InformalTransportState.IDLE_AT_ANCHOR.value
-        self.speed = 0.0
 
     def set_route_to(self, destination: str) -> None:
         """
@@ -126,6 +133,7 @@ class InformalTransport:
             self.current_node,
             destination,
         )
+
         self.route_index = 0
 
     def move_along_route(self) -> str:
@@ -163,6 +171,9 @@ class InformalTransport:
         """
         Check whether the current node is one of the synthetic anchor points.
         """
+
+        if not self.anchor_points:
+            return False
 
         anchor_node_ids = {
             anchor["node_id"]
@@ -207,10 +218,15 @@ class InformalTransport:
 
         return float(np.mean(congestion_scores))
 
-    def select_nearest_anchor(self) -> dict:
+    def select_nearest_anchor(self) -> dict | None:
         """
         Select the nearest anchor point using shortest-path distance.
+
+        If the scenario has no anchors, return None.
         """
+
+        if not self.anchor_points:
+            return None
 
         best_anchor = None
         best_distance = float("inf")
@@ -548,10 +564,19 @@ class InformalTransport:
                 cycle_completed = True
 
                 nearest_anchor = self.select_nearest_anchor()
-                self.target_anchor = nearest_anchor["anchor_id"]
-                self.set_route_to(nearest_anchor["node_id"])
 
-                self.state = InformalTransportState.REPOSITIONING.value
+                if nearest_anchor is not None:
+                    self.target_anchor = nearest_anchor["anchor_id"]
+                    self.set_route_to(nearest_anchor["node_id"])
+                    self.state = InformalTransportState.REPOSITIONING.value
+
+                else:
+                    self.target_anchor = ""
+                    self.target_node = ""
+                    self.route = [self.current_node]
+                    self.route_index = 0
+                    self.state = InformalTransportState.SEARCHING_FOR_DEMAND.value
+
                 self.threshold_timer = 0
                 self.trip_id += 1
 
