@@ -1,0 +1,297 @@
+transport_modes:
+
+  Rickshaw_Dhaka:
+    display_name: "Rickshaw"
+    city: "Dhaka"
+    country: "Bangladesh"
+    movement_family: "flexible_point_to_point"
+
+    max_speed: 5.0
+    slow_speed: 2.2
+    capacity: 2
+
+    threshold_duration_min: 2
+    threshold_duration_max: 8
+
+    anchor_preference: 0.78
+    demand_sensitivity: 0.92
+    curb_sensitivity: 0.95
+    waiting_tendency: 0.72
+    stop_flexibility: 0.95
+    route_formality: 0.10
+    terminal_dependence: 0.25
+
+    enclosure_factor: 0.70
+    edge_coupling_tendency: 0.90
+    repair_delay_probability: 0.04
+
+    context:
+      pedestrian_intensity_multiplier: 1.40
+      congestion_multiplier: 1.35
+      curb_accessibility_multiplier: 0.90
+      anchor_strength_multiplier: 1.20
+      regulation_pressure: 0.40
+
+
+  Matatu_Nairobi:
+    display_name: "Matatu"
+    city: "Nairobi"
+    country: "Kenya"
+    movement_family: "route_based_collective"
+
+    max_speed: 9.0
+    slow_speed: 3.5
+    capacity: 14
+
+    threshold_duration_min: 3
+    threshold_duration_max: 10
+
+    anchor_preference: 0.82
+    demand_sensitivity: 0.80
+    curb_sensitivity: 0.70
+    waiting_tendency: 0.78
+    stop_flexibility: 0.55
+    route_formality: 0.72
+    terminal_dependence: 0.80
+
+    enclosure_factor: 0.92
+    edge_coupling_tendency: 0.72
+    repair_delay_probability: 0.05
+
+    context:
+      pedestrian_intensity_multiplier: 1.20
+      congestion_multiplier: 1.25
+      curb_accessibility_multiplier: 0.75
+      anchor_strength_multiplier: 1.25
+      regulation_pressure: 0.55
+
+
+  Jeepney_Manila:
+    display_name: "Jeepney"
+    city: "Manila"
+    country: "Philippines"
+    movement_family: "route_based_collective"
+
+    max_speed: 8.5
+    slow_speed: 3.2
+    capacity: 18
+
+    threshold_duration_min: 3
+    threshold_duration_max: 12
+
+    anchor_preference: 0.76
+    demand_sensitivity: 0.85
+    curb_sensitivity: 0.75
+    waiting_tendency: 0.65
+    stop_flexibility: 0.70
+    route_formality: 0.78
+    terminal_dependence: 0.72
+
+    enclosure_factor: 0.90
+    edge_coupling_tendency: 0.82
+    repair_delay_probability: 0.04
+
+    context:
+      pedestrian_intensity_multiplier: 1.30
+      congestion_multiplier: 1.30
+      curb_accessibility_multiplier: 0.80
+      anchor_strength_multiplier: 1.15
+      regulation_pressure: 0.60
+
+
+  Colectivo_Pesero_MexicoCity:
+    display_name: "Colectivo / Pesero"
+    city: "Mexico City"
+    country: "Mexico"
+    movement_family: "route_based_collective"
+
+    max_speed: 9.5
+    slow_speed: 3.5
+    capacity: 16
+
+    threshold_duration_min: 2
+    threshold_duration_max: 9
+
+    anchor_preference: 0.68
+    demand_sensitivity: 0.82
+    curb_sensitivity: 0.72
+    waiting_tendency: 0.58
+    stop_flexibility: 0.65
+    route_formality: 0.75
+    terminal_dependence: 0.65
+
+    enclosure_factor: 0.88
+    edge_coupling_tendency: 0.76
+    repair_delay_probability: 0.035
+
+    context:
+      pedestrian_intensity_multiplier: 1.25
+      congestion_multiplier: 1.35
+      curb_accessibility_multiplier: 0.78
+      anchor_strength_multiplier: 1.05
+      regulation_pressure: 0.65
+
+
+  TroTro_Accra:
+    display_name: "Tro-tro"
+    city: "Accra"
+    country: "Ghana"
+    movement_family: "route_based_collective"
+
+    max_speed: 8.0
+    slow_speed: 3.0
+    capacity: 15
+
+    threshold_duration_min: 4
+    threshold_duration_max: 12
+
+    anchor_preference: 0.88
+    demand_sensitivity: 0.78
+    curb_sensitivity: 0.70
+    waiting_tendency: 0.82
+    stop_flexibility: 0.58
+    route_formality: 0.70
+    terminal_dependence: 0.88
+
+    enclosure_factor: 0.90
+    edge_coupling_tendency: 0.72
+    repair_delay_probability: 0.055
+
+    context:
+      pedestrian_intensity_multiplier: 1.18
+      congestion_multiplier: 1.15
+      curb_accessibility_multiplier: 0.76
+      anchor_strength_multiplier: 1.30
+      regulation_pressure: 0.45
+
+
+  TukTuk_Bangkok:
+    display_name: "Tuk-tuk"
+    city: "Bangkok"
+    country: "Thailand"
+    movement_family: "flexible_point_to_point"
+
+    max_speed: 7.5
+    slow_speed: 3.0
+    capacity: 3
+
+    threshold_duration_min: 2
+    threshold_duration_max: 7
+
+    anchor_preference: 0.62
+    demand_sensitivity: 0.88
+    curb_sensitivity: 0.86
+    waiting_tendency: 0.60
+    stop_flexibility: 0.88
+    route_formality: 0.22
+    terminal_dependence: 0.35
+
+    enclosure_factor: 0.62
+    edge_coupling_tendency: 0.86
+    repair_delay_probability: 0.03
+
+    context:
+      pedestrian_intensity_multiplier: 1.25
+      congestion_multiplier: 1.40
+      curb_accessibility_multiplier: 0.82
+      anchor_strength_multiplier: 0.95
+      regulation_pressure: 0.50
+
+
+  AutoRickshaw_NewDelhi:
+    display_name: "Auto-rickshaw"
+    city: "New Delhi"
+    country: "India"
+    movement_family: "flexible_point_to_point"
+
+    max_speed: 7.0
+    slow_speed: 3.0
+    capacity: 3
+
+    threshold_duration_min: 2
+    threshold_duration_max: 8
+
+    anchor_preference: 0.70
+    demand_sensitivity: 0.90
+    curb_sensitivity: 0.88
+    waiting_tendency: 0.68
+    stop_flexibility: 0.90
+    route_formality: 0.25
+    terminal_dependence: 0.45
+
+    enclosure_factor: 0.68
+    edge_coupling_tendency: 0.88
+    repair_delay_probability: 0.04
+
+    context:
+      pedestrian_intensity_multiplier: 1.35
+      congestion_multiplier: 1.45
+      curb_accessibility_multiplier: 0.78
+      anchor_strength_multiplier: 1.05
+      regulation_pressure: 0.65
+
+
+  BodaBoda_Kampala:
+    display_name: "Boda-boda"
+    city: "Kampala"
+    country: "Uganda"
+    movement_family: "flexible_point_to_point"
+
+    max_speed: 8.5
+    slow_speed: 3.8
+    capacity: 1
+
+    threshold_duration_min: 1
+    threshold_duration_max: 4
+
+    anchor_preference: 0.55
+    demand_sensitivity: 0.93
+    curb_sensitivity: 0.96
+    waiting_tendency: 0.45
+    stop_flexibility: 0.98
+    route_formality: 0.08
+    terminal_dependence: 0.22
+
+    enclosure_factor: 0.22
+    edge_coupling_tendency: 0.94
+    repair_delay_probability: 0.035
+
+    context:
+      pedestrian_intensity_multiplier: 1.22
+      congestion_multiplier: 1.18
+      curb_accessibility_multiplier: 0.95
+      anchor_strength_multiplier: 0.85
+      regulation_pressure: 0.55
+
+
+  Jitney_USA:
+    display_name: "Jitney"
+    city: "United States"
+    country: "USA"
+    movement_family: "route_flexible_collective"
+
+    max_speed: 10.0
+    slow_speed: 4.0
+    capacity: 10
+
+    threshold_duration_min: 2
+    threshold_duration_max: 8
+
+    anchor_preference: 0.58
+    demand_sensitivity: 0.72
+    curb_sensitivity: 0.66
+    waiting_tendency: 0.50
+    stop_flexibility: 0.62
+    route_formality: 0.62
+    terminal_dependence: 0.48
+
+    enclosure_factor: 0.86
+    edge_coupling_tendency: 0.58
+    repair_delay_probability: 0.025
+
+    context:
+      pedestrian_intensity_multiplier: 0.85
+      congestion_multiplier: 0.85
+      curb_accessibility_multiplier: 0.90
+      anchor_strength_multiplier: 0.70
+      regulation_pressure: 0.70

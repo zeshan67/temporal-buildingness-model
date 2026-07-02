@@ -6,3 +6,5 @@ pyyaml
 scipy
 jupyter
 ipykernel
+streamlit
+plotly
