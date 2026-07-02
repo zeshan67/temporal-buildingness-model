@@ -13,11 +13,9 @@ TBI dimensions:
 - Edge Coupling
 - Rhythmic Repetition
 
-This script reads event logs from:
-- conventional vehicle simulation
-- informal transport simulation
-
-Then it calculates agent-level and scenario-level TBI scores.
+Important conceptual rule:
+A completed passenger trip is NOT automatically a buildingness cycle.
+Rhythmic repetition requires anchor-related behavior.
 """
 
 from pathlib import Path
@@ -39,6 +37,15 @@ WEIGHTS_PATH = PROJECT_ROOT / "config" / "weights.yaml"
 
 CONVENTIONAL_LOG_PATH = OUTPUT_LOGS_DIR / "conventional_vehicle_test_events.csv"
 INFORMAL_LOG_PATH = OUTPUT_LOGS_DIR / "informal_transport_test_events.csv"
+
+
+SCENARIO_ORDER = [
+    "conventional_baseline",
+    "informal_no_anchors",
+    "informal_with_anchors",
+    "high_pedestrian_intensity",
+    "regulation_disruption",
+]
 
 
 def load_tbi_weights(weights_path: Path = WEIGHTS_PATH) -> dict:
@@ -95,6 +102,12 @@ def prepare_log_columns(logs_df: pd.DataFrame) -> pd.DataFrame:
     if "state" not in logs_df.columns:
         logs_df["state"] = "UNKNOWN"
 
+    if "agent_type" not in logs_df.columns:
+        logs_df["agent_type"] = "UNKNOWN"
+
+    if "agent_id" not in logs_df.columns:
+        raise ValueError("Log file must contain an 'agent_id' column.")
+
     return logs_df
 
 
@@ -106,14 +119,12 @@ def calculate_agent_tbi(
     """
     Calculate TBI score for a single agent.
 
-    Args:
-        agent_logs: event logs for one agent
-        weights: TBI dimension weights
-        minimum_cycle_steps: theoretical minimum number of timesteps required
-            to complete one buildingness cycle
+    Core conceptual rule:
+    Rhythmic repetition only counts if the agent has anchor-related behavior.
+    This prevents informal_no_anchors from receiving false buildingness cycles.
 
-    Returns:
-        Dictionary containing dimension scores and total TBI
+    A trip can include thresholding and interiority without becoming a full
+    buildingness rhythm cycle.
     """
 
     total_timesteps = len(agent_logs)
@@ -125,38 +136,48 @@ def calculate_agent_tbi(
     agent_type = agent_logs["agent_type"].iloc[0]
 
     # 1. Anchoring
-    # Strong anchoring means the agent spends time in IDLE_AT_ANCHOR.
+    # Measures how much time the agent spends in the explicit anchor-waiting state.
     anchoring_steps = (
         agent_logs["state"].astype(str).eq("IDLE_AT_ANCHOR")
     ).sum()
+
     anchoring_score = anchoring_steps / total_timesteps
 
     # 2. Thresholding
-    # Boarding and alighting events create temporary thresholds.
+    # Measures boarding and alighting threshold moments.
     thresholding_score = agent_logs["threshold_event"].sum() / total_timesteps
 
     # 3. Interiority
-    # Occupied movement represents temporary interior formation.
+    # Measures time when the agent contains/carries a passenger.
     interiority_score = (
         agent_logs["occupancy"].astype(float).gt(0).sum()
         / total_timesteps
     )
 
     # 4. Pausing
-    # Temporary stops produce micro-occupation in the street.
+    # Measures temporary stops that produce micro-occupation in the street.
     pausing_score = agent_logs["pause_event"].sum() / total_timesteps
 
     # 5. Edge Coupling
-    # Time near active street edges measures relation to urban edge activity.
+    # Measures how often the agent is near active street-edge conditions.
     edge_coupling_score = agent_logs["near_active_edge"].sum() / total_timesteps
 
     # 6. Rhythmic Repetition
-    # A cycle is anchor/threshold/movement/threshold/repositioning behavior.
-    completed_cycles = agent_logs["cycle_completed"].sum()
-    maximum_possible_cycles = max(1, total_timesteps / minimum_cycle_steps)
-    rhythmic_repetition_score = completed_cycles / maximum_possible_cycles
+    # A completed passenger trip is only counted as a buildingness cycle if
+    # the agent has anchor-related behavior.
+    has_anchor_behavior = (
+        anchoring_steps > 0
+        or agent_logs["near_anchor"].sum() > 0
+    )
 
-    # Keep score between 0 and 1.
+    if has_anchor_behavior:
+        completed_cycles = agent_logs["cycle_completed"].sum()
+    else:
+        completed_cycles = 0
+
+    maximum_possible_cycles = max(1, total_timesteps / minimum_cycle_steps)
+
+    rhythmic_repetition_score = completed_cycles / maximum_possible_cycles
     rhythmic_repetition_score = min(1.0, rhythmic_repetition_score)
 
     total_tbi = (
@@ -200,7 +221,7 @@ def calculate_tbi_for_log_file(
 
     agent_scores = []
 
-    for agent_id, agent_logs in logs_df.groupby("agent_id"):
+    for _, agent_logs in logs_df.groupby("agent_id"):
         score = calculate_agent_tbi(
             agent_logs=agent_logs,
             weights=weights,
@@ -241,6 +262,20 @@ def create_scenario_summary(agent_scores_df: pd.DataFrame) -> pd.DataFrame:
     for column in numeric_columns:
         summary_df[column] = summary_df[column].round(4)
 
+    summary_df["scenario_name"] = pd.Categorical(
+        summary_df["scenario_name"],
+        categories=SCENARIO_ORDER,
+        ordered=True,
+    )
+
+    summary_df = (
+        summary_df
+        .sort_values("scenario_name")
+        .reset_index(drop=True)
+    )
+
+    summary_df["scenario_name"] = summary_df["scenario_name"].astype(str)
+
     return summary_df
 
 
@@ -270,17 +305,19 @@ def plot_tbi_comparison(scenario_summary_df: pd.DataFrame) -> Path:
 
     OUTPUT_FIGURES_DIR.mkdir(parents=True, exist_ok=True)
 
-    plt.figure(figsize=(8, 5))
+    plot_df = scenario_summary_df.copy()
+
+    plt.figure(figsize=(10, 5))
 
     plt.bar(
-        scenario_summary_df["scenario_name"],
-        scenario_summary_df["mean_TBI"],
+        plot_df["scenario_name"],
+        plot_df["mean_TBI"],
     )
 
     plt.title("Temporal Buildingness Index Comparison")
     plt.xlabel("Scenario")
     plt.ylabel("Mean TBI")
-    plt.xticks(rotation=20, ha="right")
+    plt.xticks(rotation=25, ha="right")
     plt.tight_layout()
 
     output_path = OUTPUT_FIGURES_DIR / "tbi_comparison.png"
@@ -291,43 +328,185 @@ def plot_tbi_comparison(scenario_summary_df: pd.DataFrame) -> Path:
     return output_path
 
 
+def get_scenario_value(
+    scenario_summary_df: pd.DataFrame,
+    scenario_name: str,
+    column_name: str,
+) -> float | None:
+    """
+    Safely get one scenario value from the summary table.
+    """
+
+    row = scenario_summary_df[
+        scenario_summary_df["scenario_name"] == scenario_name
+    ]
+
+    if row.empty:
+        return None
+
+    return float(row[column_name].iloc[0])
+
+
+def print_core_comparison(scenario_summary_df: pd.DataFrame) -> None:
+    """
+    Print the main conventional-vs-informal comparison.
+    """
+
+    conventional_tbi = get_scenario_value(
+        scenario_summary_df,
+        "conventional_baseline",
+        "mean_TBI",
+    )
+
+    informal_tbi = get_scenario_value(
+        scenario_summary_df,
+        "informal_with_anchors",
+        "mean_TBI",
+    )
+
+    if conventional_tbi is None or informal_tbi is None:
+        return
+
+    print("\nCore comparison:")
+    print(f"TBI_conventional_vehicle = {conventional_tbi}")
+    print(f"TBI_informal_transport = {informal_tbi}")
+
+    if informal_tbi > conventional_tbi:
+        print(
+            "\nResult: informal transport produced a higher "
+            "Temporal Buildingness Index than the conventional vehicle baseline."
+        )
+    else:
+        print(
+            "\nResult: informal transport did not produce a higher "
+            "Temporal Buildingness Index in this run."
+        )
+
+
+def print_scenario_diagnostics(scenario_summary_df: pd.DataFrame) -> None:
+    """
+    Print diagnostic checks for theoretical scenario behavior.
+
+    These checks do not stop the code.
+    They help us understand whether the current model calibration behaves
+    according to the theoretical expectations.
+    """
+
+    conventional = get_scenario_value(
+        scenario_summary_df,
+        "conventional_baseline",
+        "mean_TBI",
+    )
+
+    no_anchors = get_scenario_value(
+        scenario_summary_df,
+        "informal_no_anchors",
+        "mean_TBI",
+    )
+
+    with_anchors = get_scenario_value(
+        scenario_summary_df,
+        "informal_with_anchors",
+        "mean_TBI",
+    )
+
+    high_pedestrian = get_scenario_value(
+        scenario_summary_df,
+        "high_pedestrian_intensity",
+        "mean_TBI",
+    )
+
+    regulation = get_scenario_value(
+        scenario_summary_df,
+        "regulation_disruption",
+        "mean_TBI",
+    )
+
+    no_anchor_rhythm = get_scenario_value(
+        scenario_summary_df,
+        "informal_no_anchors",
+        "mean_rhythmic_repetition_score",
+    )
+
+    print("\nScenario diagnostics:")
+
+    if conventional is not None and no_anchors is not None:
+        if no_anchors > conventional:
+            print("PASS: informal_no_anchors has higher TBI than conventional_baseline.")
+        else:
+            print("CHECK: informal_no_anchors does not exceed conventional_baseline.")
+
+    if no_anchor_rhythm is not None:
+        if no_anchor_rhythm == 0:
+            print("PASS: informal_no_anchors has zero rhythmic repetition.")
+        else:
+            print(
+                "CHECK: informal_no_anchors still has rhythmic repetition. "
+                "This may indicate false cycle counting."
+            )
+
+    if no_anchors is not None and with_anchors is not None:
+        if with_anchors > no_anchors:
+            print("PASS: informal_with_anchors exceeds informal_no_anchors.")
+        else:
+            print(
+                "CHECK: informal_with_anchors does not exceed informal_no_anchors. "
+                "This suggests scenario calibration is still needed."
+            )
+
+    if with_anchors is not None and high_pedestrian is not None:
+        if high_pedestrian > with_anchors:
+            print("PASS: high_pedestrian_intensity exceeds informal_with_anchors.")
+        else:
+            print(
+                "CHECK: high_pedestrian_intensity does not exceed informal_with_anchors."
+            )
+
+    if regulation is not None and with_anchors is not None:
+        if regulation < with_anchors:
+            print("PASS: regulation_disruption is lower than informal_with_anchors.")
+        else:
+            print(
+                "CHECK: regulation_disruption is not lower than informal_with_anchors. "
+                "The disruption scenario may need stronger restrictions."
+            )
+
+
 def print_tbi_summary(scenario_summary_df: pd.DataFrame) -> None:
     """
     Print a readable summary of TBI results.
+
+    This version forces pandas to show all columns so important values
+    are not hidden behind ellipses.
     """
 
     print("Temporal Buildingness Index calculation completed.")
 
+    display_columns = [
+        "scenario_name",
+        "agent_type",
+        "agent_count",
+        "mean_TBI",
+        "mean_anchoring_score",
+        "mean_thresholding_score",
+        "mean_interiority_score",
+        "mean_pausing_score",
+        "mean_edge_coupling_score",
+        "mean_rhythmic_repetition_score",
+        "mean_completed_cycles",
+    ]
+
     print("\nScenario summary:")
-    print(scenario_summary_df)
 
-    if len(scenario_summary_df) >= 2:
-        conventional_row = scenario_summary_df[
-            scenario_summary_df["scenario_name"] == "conventional_baseline"
-        ]
+    with pd.option_context(
+        "display.max_columns", None,
+        "display.width", 220,
+        "display.max_colwidth", None,
+    ):
+        print(scenario_summary_df[display_columns].to_string(index=False))
 
-        informal_row = scenario_summary_df[
-            scenario_summary_df["scenario_name"] == "informal_with_anchors"
-        ]
-
-        if not conventional_row.empty and not informal_row.empty:
-            conventional_tbi = float(conventional_row["mean_TBI"].iloc[0])
-            informal_tbi = float(informal_row["mean_TBI"].iloc[0])
-
-            print("\nCore comparison:")
-            print(f"TBI_conventional_vehicle = {conventional_tbi}")
-            print(f"TBI_informal_transport = {informal_tbi}")
-
-            if informal_tbi > conventional_tbi:
-                print(
-                    "\nResult: informal transport produced a higher "
-                    "Temporal Buildingness Index than the conventional vehicle baseline."
-                )
-            else:
-                print(
-                    "\nResult: informal transport did not produce a higher "
-                    "Temporal Buildingness Index in this run."
-                )
+    print_core_comparison(scenario_summary_df)
+    print_scenario_diagnostics(scenario_summary_df)
 
 
 if __name__ == "__main__":
