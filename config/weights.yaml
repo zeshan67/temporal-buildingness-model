@@ -1,0 +1,7 @@
+temporal_buildingness_weights:
+  anchoring: 0.20
+  thresholding: 0.20
+  interiority: 0.20
+  pausing: 0.10
+  edge_coupling: 0.15
+  rhythmic_repetition: 0.15
