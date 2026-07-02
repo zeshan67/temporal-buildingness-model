@@ -1,0 +1,201 @@
+agent_id,agent_type,mode_name,display_name,city,country,movement_family,total_timesteps,anchoring_score,thresholding_score,occupied_score_raw,enclosure_factor,interiority_score,pausing_score,edge_coupling_score,rhythmic_repetition_score,completed_cycles,TBI,scenario_name
+CV_1,conventional_vehicle,,,,,,1000,0.0,0.0,0.0,0.0,0.0,0.012,0.087,0.0,0,0.0142,conventional_baseline
+CV_10,conventional_vehicle,,,,,,1000,0.0,0.0,0.0,0.0,0.0,0.022,0.083,0.0,0,0.0147,conventional_baseline
+CV_11,conventional_vehicle,,,,,,1000,0.0,0.0,0.0,0.0,0.0,0.016,0.079,0.0,0,0.0135,conventional_baseline
+CV_12,conventional_vehicle,,,,,,1000,0.0,0.0,0.0,0.0,0.0,0.014,0.08,0.0,0,0.0134,conventional_baseline
+CV_13,conventional_vehicle,,,,,,1000,0.0,0.0,0.0,0.0,0.0,0.016,0.096,0.0,0,0.016,conventional_baseline
+CV_14,conventional_vehicle,,,,,,1000,0.0,0.0,0.0,0.0,0.0,0.021,0.078,0.0,0,0.0138,conventional_baseline
+CV_15,conventional_vehicle,,,,,,1000,0.0,0.0,0.0,0.0,0.0,0.02,0.087,0.0,0,0.015,conventional_baseline
+CV_16,conventional_vehicle,,,,,,1000,0.0,0.0,0.0,0.0,0.0,0.023,0.099,0.0,0,0.0171,conventional_baseline
+CV_17,conventional_vehicle,,,,,,1000,0.0,0.0,0.0,0.0,0.0,0.025,0.079,0.0,0,0.0143,conventional_baseline
+CV_18,conventional_vehicle,,,,,,1000,0.0,0.0,0.0,0.0,0.0,0.029,0.077,0.0,0,0.0144,conventional_baseline
+CV_19,conventional_vehicle,,,,,,1000,0.0,0.0,0.0,0.0,0.0,0.025,0.097,0.0,0,0.0171,conventional_baseline
+CV_2,conventional_vehicle,,,,,,1000,0.0,0.0,0.0,0.0,0.0,0.015,0.083,0.0,0,0.014,conventional_baseline
+CV_20,conventional_vehicle,,,,,,1000,0.0,0.0,0.0,0.0,0.0,0.02,0.076,0.0,0,0.0134,conventional_baseline
+CV_3,conventional_vehicle,,,,,,1000,0.0,0.0,0.0,0.0,0.0,0.021,0.086,0.0,0,0.015,conventional_baseline
+CV_4,conventional_vehicle,,,,,,1000,0.0,0.0,0.0,0.0,0.0,0.024,0.098,0.0,0,0.0171,conventional_baseline
+CV_5,conventional_vehicle,,,,,,1000,0.0,0.0,0.0,0.0,0.0,0.016,0.075,0.0,0,0.0129,conventional_baseline
+CV_6,conventional_vehicle,,,,,,1000,0.0,0.0,0.0,0.0,0.0,0.024,0.085,0.0,0,0.0152,conventional_baseline
+CV_7,conventional_vehicle,,,,,,1000,0.0,0.0,0.0,0.0,0.0,0.03,0.084,0.0,0,0.0156,conventional_baseline
+CV_8,conventional_vehicle,,,,,,1000,0.0,0.0,0.0,0.0,0.0,0.017,0.071,0.0,0,0.0123,conventional_baseline
+CV_9,conventional_vehicle,,,,,,1000,0.0,0.0,0.0,0.0,0.0,0.02,0.076,0.0,0,0.0134,conventional_baseline
+IT_1,informal_transport,Rickshaw_Dhaka,Rickshaw,Dhaka,Bangladesh,flexible_point_to_point,1000,0.328,0.242,0.46,0.7,0.322,0.192,0.881,0.06,3,0.3387,Rickshaw_Dhaka
+IT_10,informal_transport,Rickshaw_Dhaka,Rickshaw,Dhaka,Bangladesh,flexible_point_to_point,1000,0.27,0.235,0.538,0.7,0.3766,0.262,0.875,0.04,2,0.3398,Rickshaw_Dhaka
+IT_11,informal_transport,Rickshaw_Dhaka,Rickshaw,Dhaka,Bangladesh,flexible_point_to_point,1000,0.219,0.254,0.565,0.7,0.3955,0.239,0.882,0.04,2,0.3359,Rickshaw_Dhaka
+IT_12,informal_transport,Rickshaw_Dhaka,Rickshaw,Dhaka,Bangladesh,flexible_point_to_point,1000,0.173,0.371,0.56,0.7,0.392,0.188,0.913,0.1,5,0.3579,Rickshaw_Dhaka
+IT_13,informal_transport,Rickshaw_Dhaka,Rickshaw,Dhaka,Bangladesh,flexible_point_to_point,1000,0.325,0.239,0.468,0.7,0.3276,0.191,0.926,0.08,4,0.3483,Rickshaw_Dhaka
+IT_14,informal_transport,Rickshaw_Dhaka,Rickshaw,Dhaka,Bangladesh,flexible_point_to_point,1000,0.267,0.279,0.518,0.7,0.3626,0.22,0.906,0.12,6,0.3576,Rickshaw_Dhaka
+IT_15,informal_transport,Rickshaw_Dhaka,Rickshaw,Dhaka,Bangladesh,flexible_point_to_point,1000,0.383,0.214,0.413,0.7,0.2891,0.183,0.926,0.16,8,0.3584,Rickshaw_Dhaka
+IT_16,informal_transport,Rickshaw_Dhaka,Rickshaw,Dhaka,Bangladesh,flexible_point_to_point,1000,0.432,0.17,0.386,0.7,0.2702,0.175,0.913,0.08,4,0.3409,Rickshaw_Dhaka
+IT_17,informal_transport,Rickshaw_Dhaka,Rickshaw,Dhaka,Bangladesh,flexible_point_to_point,1000,0.216,0.284,0.56,0.7,0.392,0.227,0.875,0.0,0,0.3324,Rickshaw_Dhaka
+IT_18,informal_transport,Rickshaw_Dhaka,Rickshaw,Dhaka,Bangladesh,flexible_point_to_point,1000,0.271,0.282,0.508,0.7,0.3556,0.212,0.885,0.06,3,0.3447,Rickshaw_Dhaka
+IT_19,informal_transport,Rickshaw_Dhaka,Rickshaw,Dhaka,Bangladesh,flexible_point_to_point,1000,0.165,0.287,0.604,0.7,0.4228,0.252,0.913,0.06,3,0.3461,Rickshaw_Dhaka
+IT_2,informal_transport,Rickshaw_Dhaka,Rickshaw,Dhaka,Bangladesh,flexible_point_to_point,1000,0.286,0.295,0.481,0.7,0.3367,0.192,0.934,0.06,3,0.3518,Rickshaw_Dhaka
+IT_20,informal_transport,Rickshaw_Dhaka,Rickshaw,Dhaka,Bangladesh,flexible_point_to_point,1000,0.392,0.2,0.42,0.7,0.294,0.172,0.937,0.08,4,0.347,Rickshaw_Dhaka
+IT_3,informal_transport,Rickshaw_Dhaka,Rickshaw,Dhaka,Bangladesh,flexible_point_to_point,1000,0.381,0.189,0.428,0.7,0.2996,0.195,0.921,0.08,4,0.3436,Rickshaw_Dhaka
+IT_4,informal_transport,Rickshaw_Dhaka,Rickshaw,Dhaka,Bangladesh,flexible_point_to_point,1000,0.204,0.343,0.525,0.7,0.3675,0.176,0.917,0.08,4,0.3501,Rickshaw_Dhaka
+IT_5,informal_transport,Rickshaw_Dhaka,Rickshaw,Dhaka,Bangladesh,flexible_point_to_point,1000,0.276,0.267,0.472,0.7,0.3304,0.172,0.899,0.14,7,0.3477,Rickshaw_Dhaka
+IT_6,informal_transport,Rickshaw_Dhaka,Rickshaw,Dhaka,Bangladesh,flexible_point_to_point,1000,0.301,0.249,0.481,0.7,0.3367,0.189,0.919,0.06,3,0.3431,Rickshaw_Dhaka
+IT_7,informal_transport,Rickshaw_Dhaka,Rickshaw,Dhaka,Bangladesh,flexible_point_to_point,1000,0.276,0.256,0.493,0.7,0.3451,0.195,0.909,0.14,7,0.3523,Rickshaw_Dhaka
+IT_8,informal_transport,Rickshaw_Dhaka,Rickshaw,Dhaka,Bangladesh,flexible_point_to_point,1000,0.324,0.218,0.484,0.7,0.3388,0.204,0.913,0.02,1,0.3365,Rickshaw_Dhaka
+IT_9,informal_transport,Rickshaw_Dhaka,Rickshaw,Dhaka,Bangladesh,flexible_point_to_point,1000,0.272,0.226,0.533,0.7,0.3731,0.245,0.849,0.08,4,0.3381,Rickshaw_Dhaka
+IT_1,informal_transport,Matatu_Nairobi,Matatu,Nairobi,Kenya,route_based_collective,1000,0.036,0.4,0.629,0.92,0.5787,0.245,0.799,0.42,21,0.4103,Matatu_Nairobi
+IT_10,informal_transport,Matatu_Nairobi,Matatu,Nairobi,Kenya,route_based_collective,1000,0.037,0.301,0.717,0.92,0.6596,0.35,0.723,0.22,11,0.376,Matatu_Nairobi
+IT_11,informal_transport,Matatu_Nairobi,Matatu,Nairobi,Kenya,route_based_collective,1000,0.037,0.4,0.646,0.92,0.5943,0.204,0.76,0.36,18,0.3947,Matatu_Nairobi
+IT_12,informal_transport,Matatu_Nairobi,Matatu,Nairobi,Kenya,route_based_collective,1000,0.036,0.343,0.682,0.92,0.6274,0.278,0.781,0.3,15,0.3912,Matatu_Nairobi
+IT_13,informal_transport,Matatu_Nairobi,Matatu,Nairobi,Kenya,route_based_collective,1000,0.037,0.366,0.632,0.92,0.5814,0.226,0.768,0.38,19,0.3917,Matatu_Nairobi
+IT_14,informal_transport,Matatu_Nairobi,Matatu,Nairobi,Kenya,route_based_collective,1000,0.046,0.363,0.641,0.92,0.5897,0.242,0.74,0.3,15,0.3799,Matatu_Nairobi
+IT_15,informal_transport,Matatu_Nairobi,Matatu,Nairobi,Kenya,route_based_collective,1000,0.033,0.357,0.626,0.92,0.5759,0.216,0.719,0.34,17,0.3736,Matatu_Nairobi
+IT_16,informal_transport,Matatu_Nairobi,Matatu,Nairobi,Kenya,route_based_collective,1000,0.039,0.342,0.638,0.92,0.587,0.238,0.793,0.26,13,0.3753,Matatu_Nairobi
+IT_17,informal_transport,Matatu_Nairobi,Matatu,Nairobi,Kenya,route_based_collective,1000,0.04,0.353,0.655,0.92,0.6026,0.247,0.749,0.34,17,0.3872,Matatu_Nairobi
+IT_18,informal_transport,Matatu_Nairobi,Matatu,Nairobi,Kenya,route_based_collective,1000,0.034,0.319,0.674,0.92,0.6201,0.305,0.737,0.22,11,0.3687,Matatu_Nairobi
+IT_19,informal_transport,Matatu_Nairobi,Matatu,Nairobi,Kenya,route_based_collective,1000,0.04,0.395,0.644,0.92,0.5925,0.202,0.757,0.24,12,0.3752,Matatu_Nairobi
+IT_2,informal_transport,Matatu_Nairobi,Matatu,Nairobi,Kenya,route_based_collective,1000,0.019,0.318,0.716,0.92,0.6587,0.277,0.763,0.14,7,0.3623,Matatu_Nairobi
+IT_20,informal_transport,Matatu_Nairobi,Matatu,Nairobi,Kenya,route_based_collective,1000,0.023,0.384,0.663,0.92,0.61,0.226,0.761,0.22,11,0.3731,Matatu_Nairobi
+IT_3,informal_transport,Matatu_Nairobi,Matatu,Nairobi,Kenya,route_based_collective,1000,0.039,0.358,0.656,0.92,0.6035,0.262,0.774,0.34,17,0.3934,Matatu_Nairobi
+IT_4,informal_transport,Matatu_Nairobi,Matatu,Nairobi,Kenya,route_based_collective,1000,0.039,0.393,0.638,0.92,0.587,0.253,0.833,0.3,15,0.399,Matatu_Nairobi
+IT_5,informal_transport,Matatu_Nairobi,Matatu,Nairobi,Kenya,route_based_collective,1000,0.03,0.331,0.697,0.92,0.6412,0.278,0.776,0.32,16,0.3926,Matatu_Nairobi
+IT_6,informal_transport,Matatu_Nairobi,Matatu,Nairobi,Kenya,route_based_collective,1000,0.04,0.339,0.642,0.92,0.5906,0.254,0.761,0.32,16,0.3815,Matatu_Nairobi
+IT_7,informal_transport,Matatu_Nairobi,Matatu,Nairobi,Kenya,route_based_collective,1000,0.04,0.396,0.645,0.92,0.5934,0.225,0.757,0.3,15,0.3869,Matatu_Nairobi
+IT_8,informal_transport,Matatu_Nairobi,Matatu,Nairobi,Kenya,route_based_collective,1000,0.045,0.357,0.656,0.92,0.6035,0.241,0.785,0.32,16,0.391,Matatu_Nairobi
+IT_9,informal_transport,Matatu_Nairobi,Matatu,Nairobi,Kenya,route_based_collective,1000,0.044,0.375,0.642,0.92,0.5906,0.251,0.774,0.34,17,0.3941,Matatu_Nairobi
+IT_1,informal_transport,Jeepney_Manila,Jeepney,Manila,Philippines,route_based_collective,1000,0.034,0.46,0.598,0.9,0.5382,0.218,0.838,0.34,17,0.4049,Jeepney_Manila
+IT_10,informal_transport,Jeepney_Manila,Jeepney,Manila,Philippines,route_based_collective,1000,0.02,0.426,0.699,0.9,0.6291,0.258,0.784,0.1,5,0.3734,Jeepney_Manila
+IT_11,informal_transport,Jeepney_Manila,Jeepney,Manila,Philippines,route_based_collective,1000,0.042,0.495,0.599,0.9,0.5391,0.18,0.848,0.2,10,0.3904,Jeepney_Manila
+IT_12,informal_transport,Jeepney_Manila,Jeepney,Manila,Philippines,route_based_collective,1000,0.028,0.453,0.629,0.9,0.5661,0.218,0.821,0.38,19,0.4114,Jeepney_Manila
+IT_13,informal_transport,Jeepney_Manila,Jeepney,Manila,Philippines,route_based_collective,1000,0.041,0.435,0.596,0.9,0.5364,0.206,0.892,0.38,19,0.4139,Jeepney_Manila
+IT_14,informal_transport,Jeepney_Manila,Jeepney,Manila,Philippines,route_based_collective,1000,0.037,0.467,0.605,0.9,0.5445,0.212,0.833,0.44,22,0.4219,Jeepney_Manila
+IT_15,informal_transport,Jeepney_Manila,Jeepney,Manila,Philippines,route_based_collective,1000,0.051,0.513,0.542,0.9,0.4878,0.168,0.888,0.3,15,0.4054,Jeepney_Manila
+IT_16,informal_transport,Jeepney_Manila,Jeepney,Manila,Philippines,route_based_collective,1000,0.04,0.475,0.581,0.9,0.5229,0.158,0.865,0.4,20,0.4131,Jeepney_Manila
+IT_17,informal_transport,Jeepney_Manila,Jeepney,Manila,Philippines,route_based_collective,1000,0.037,0.432,0.634,0.9,0.5706,0.237,0.838,0.2,10,0.3873,Jeepney_Manila
+IT_18,informal_transport,Jeepney_Manila,Jeepney,Manila,Philippines,route_based_collective,1000,0.046,0.502,0.526,0.9,0.4734,0.153,0.89,0.38,19,0.4101,Jeepney_Manila
+IT_19,informal_transport,Jeepney_Manila,Jeepney,Manila,Philippines,route_based_collective,1000,0.039,0.487,0.581,0.9,0.5229,0.173,0.861,0.32,16,0.4042,Jeepney_Manila
+IT_2,informal_transport,Jeepney_Manila,Jeepney,Manila,Philippines,route_based_collective,1000,0.032,0.428,0.652,0.9,0.5868,0.251,0.822,0.3,15,0.4028,Jeepney_Manila
+IT_20,informal_transport,Jeepney_Manila,Jeepney,Manila,Philippines,route_based_collective,1000,0.042,0.477,0.601,0.9,0.5409,0.216,0.861,0.32,16,0.4107,Jeepney_Manila
+IT_3,informal_transport,Jeepney_Manila,Jeepney,Manila,Philippines,route_based_collective,1000,0.021,0.434,0.639,0.9,0.5751,0.229,0.823,0.26,13,0.3914,Jeepney_Manila
+IT_4,informal_transport,Jeepney_Manila,Jeepney,Manila,Philippines,route_based_collective,1000,0.022,0.508,0.597,0.9,0.5373,0.201,0.882,0.24,12,0.4019,Jeepney_Manila
+IT_5,informal_transport,Jeepney_Manila,Jeepney,Manila,Philippines,route_based_collective,1000,0.037,0.443,0.639,0.9,0.5751,0.201,0.879,0.3,15,0.408,Jeepney_Manila
+IT_6,informal_transport,Jeepney_Manila,Jeepney,Manila,Philippines,route_based_collective,1000,0.038,0.484,0.599,0.9,0.5391,0.179,0.865,0.3,15,0.4049,Jeepney_Manila
+IT_7,informal_transport,Jeepney_Manila,Jeepney,Manila,Philippines,route_based_collective,1000,0.037,0.447,0.62,0.9,0.558,0.222,0.857,0.18,9,0.3862,Jeepney_Manila
+IT_8,informal_transport,Jeepney_Manila,Jeepney,Manila,Philippines,route_based_collective,1000,0.031,0.457,0.595,0.9,0.5355,0.189,0.84,0.32,16,0.3976,Jeepney_Manila
+IT_9,informal_transport,Jeepney_Manila,Jeepney,Manila,Philippines,route_based_collective,1000,0.035,0.516,0.581,0.9,0.5229,0.162,0.882,0.4,20,0.4233,Jeepney_Manila
+IT_1,informal_transport,Colectivo_Pesero_MexicoCity,Colectivo / Pesero,Mexico City,Mexico,route_based_collective,1000,0.036,0.377,0.639,0.88,0.5623,0.193,0.788,0.22,11,0.3656,Colectivo_Pesero_MexicoCity
+IT_10,informal_transport,Colectivo_Pesero_MexicoCity,Colectivo / Pesero,Mexico City,Mexico,route_based_collective,1000,0.043,0.37,0.608,0.88,0.535,0.212,0.782,0.3,15,0.3731,Colectivo_Pesero_MexicoCity
+IT_11,informal_transport,Colectivo_Pesero_MexicoCity,Colectivo / Pesero,Mexico City,Mexico,route_based_collective,1000,0.03,0.308,0.699,0.88,0.6151,0.301,0.739,0.3,15,0.3766,Colectivo_Pesero_MexicoCity
+IT_12,informal_transport,Colectivo_Pesero_MexicoCity,Colectivo / Pesero,Mexico City,Mexico,route_based_collective,1000,0.045,0.348,0.636,0.88,0.5597,0.237,0.8,0.3,15,0.3792,Colectivo_Pesero_MexicoCity
+IT_13,informal_transport,Colectivo_Pesero_MexicoCity,Colectivo / Pesero,Mexico City,Mexico,route_based_collective,1000,0.015,0.338,0.714,0.88,0.6283,0.303,0.81,0.1,5,0.3631,Colectivo_Pesero_MexicoCity
+IT_14,informal_transport,Colectivo_Pesero_MexicoCity,Colectivo / Pesero,Mexico City,Mexico,route_based_collective,1000,0.024,0.348,0.675,0.88,0.594,0.248,0.814,0.2,10,0.3701,Colectivo_Pesero_MexicoCity
+IT_15,informal_transport,Colectivo_Pesero_MexicoCity,Colectivo / Pesero,Mexico City,Mexico,route_based_collective,1000,0.044,0.329,0.652,0.88,0.5738,0.287,0.776,0.3,15,0.3795,Colectivo_Pesero_MexicoCity
+IT_16,informal_transport,Colectivo_Pesero_MexicoCity,Colectivo / Pesero,Mexico City,Mexico,route_based_collective,1000,0.035,0.313,0.67,0.88,0.5896,0.256,0.826,0.32,16,0.385,Colectivo_Pesero_MexicoCity
+IT_17,informal_transport,Colectivo_Pesero_MexicoCity,Colectivo / Pesero,Mexico City,Mexico,route_based_collective,1000,0.022,0.334,0.715,0.88,0.6292,0.331,0.794,0.18,9,0.3762,Colectivo_Pesero_MexicoCity
+IT_18,informal_transport,Colectivo_Pesero_MexicoCity,Colectivo / Pesero,Mexico City,Mexico,route_based_collective,1000,0.031,0.342,0.686,0.88,0.6037,0.263,0.783,0.22,11,0.3721,Colectivo_Pesero_MexicoCity
+IT_19,informal_transport,Colectivo_Pesero_MexicoCity,Colectivo / Pesero,Mexico City,Mexico,route_based_collective,1000,0.036,0.334,0.634,0.88,0.5579,0.237,0.791,0.22,11,0.3609,Colectivo_Pesero_MexicoCity
+IT_2,informal_transport,Colectivo_Pesero_MexicoCity,Colectivo / Pesero,Mexico City,Mexico,route_based_collective,1000,0.015,0.344,0.72,0.88,0.6336,0.299,0.801,0.16,8,0.3726,Colectivo_Pesero_MexicoCity
+IT_20,informal_transport,Colectivo_Pesero_MexicoCity,Colectivo / Pesero,Mexico City,Mexico,route_based_collective,1000,0.032,0.312,0.66,0.88,0.5808,0.295,0.814,0.36,18,0.3906,Colectivo_Pesero_MexicoCity
+IT_3,informal_transport,Colectivo_Pesero_MexicoCity,Colectivo / Pesero,Mexico City,Mexico,route_based_collective,1000,0.033,0.314,0.667,0.88,0.587,0.295,0.719,0.3,15,0.3691,Colectivo_Pesero_MexicoCity
+IT_4,informal_transport,Colectivo_Pesero_MexicoCity,Colectivo / Pesero,Mexico City,Mexico,route_based_collective,1000,0.027,0.319,0.694,0.88,0.6107,0.314,0.807,0.32,16,0.3918,Colectivo_Pesero_MexicoCity
+IT_5,informal_transport,Colectivo_Pesero_MexicoCity,Colectivo / Pesero,Mexico City,Mexico,route_based_collective,1000,0.042,0.296,0.71,0.88,0.6248,0.33,0.717,0.24,12,0.3691,Colectivo_Pesero_MexicoCity
+IT_6,informal_transport,Colectivo_Pesero_MexicoCity,Colectivo / Pesero,Mexico City,Mexico,route_based_collective,1000,0.031,0.353,0.669,0.88,0.5887,0.274,0.797,0.24,12,0.3775,Colectivo_Pesero_MexicoCity
+IT_7,informal_transport,Colectivo_Pesero_MexicoCity,Colectivo / Pesero,Mexico City,Mexico,route_based_collective,1000,0.043,0.354,0.645,0.88,0.5676,0.238,0.791,0.32,16,0.3834,Colectivo_Pesero_MexicoCity
+IT_8,informal_transport,Colectivo_Pesero_MexicoCity,Colectivo / Pesero,Mexico City,Mexico,route_based_collective,1000,0.023,0.365,0.7,0.88,0.616,0.282,0.764,0.22,11,0.3766,Colectivo_Pesero_MexicoCity
+IT_9,informal_transport,Colectivo_Pesero_MexicoCity,Colectivo / Pesero,Mexico City,Mexico,route_based_collective,1000,0.024,0.307,0.717,0.88,0.631,0.343,0.766,0.22,11,0.3746,Colectivo_Pesero_MexicoCity
+IT_1,informal_transport,TroTro_Accra,Tro-tro,Accra,Ghana,route_based_collective,1000,0.07,0.47,0.552,0.9,0.4968,0.17,0.629,0.46,23,0.3877,TroTro_Accra
+IT_10,informal_transport,TroTro_Accra,Tro-tro,Accra,Ghana,route_based_collective,1000,0.037,0.507,0.576,0.9,0.5184,0.164,0.713,0.38,19,0.3928,TroTro_Accra
+IT_11,informal_transport,TroTro_Accra,Tro-tro,Accra,Ghana,route_based_collective,1000,0.07,0.453,0.573,0.9,0.5157,0.184,0.69,0.32,16,0.3776,TroTro_Accra
+IT_12,informal_transport,TroTro_Accra,Tro-tro,Accra,Ghana,route_based_collective,1000,0.052,0.433,0.582,0.9,0.5238,0.184,0.625,0.44,22,0.3799,TroTro_Accra
+IT_13,informal_transport,TroTro_Accra,Tro-tro,Accra,Ghana,route_based_collective,1000,0.07,0.497,0.544,0.9,0.4896,0.126,0.662,0.46,23,0.3922,TroTro_Accra
+IT_14,informal_transport,TroTro_Accra,Tro-tro,Accra,Ghana,route_based_collective,1000,0.041,0.419,0.632,0.9,0.5688,0.196,0.687,0.32,16,0.3764,TroTro_Accra
+IT_15,informal_transport,TroTro_Accra,Tro-tro,Accra,Ghana,route_based_collective,1000,0.077,0.485,0.53,0.9,0.477,0.159,0.664,0.42,21,0.3863,TroTro_Accra
+IT_16,informal_transport,TroTro_Accra,Tro-tro,Accra,Ghana,route_based_collective,1000,0.056,0.492,0.546,0.9,0.4914,0.124,0.681,0.28,14,0.3644,TroTro_Accra
+IT_17,informal_transport,TroTro_Accra,Tro-tro,Accra,Ghana,route_based_collective,1000,0.063,0.442,0.585,0.9,0.5265,0.19,0.741,0.38,19,0.3935,TroTro_Accra
+IT_18,informal_transport,TroTro_Accra,Tro-tro,Accra,Ghana,route_based_collective,1000,0.069,0.407,0.606,0.9,0.5454,0.232,0.633,0.36,18,0.3764,TroTro_Accra
+IT_19,informal_transport,TroTro_Accra,Tro-tro,Accra,Ghana,route_based_collective,1000,0.047,0.446,0.62,0.9,0.558,0.216,0.707,0.44,22,0.4039,TroTro_Accra
+IT_2,informal_transport,TroTro_Accra,Tro-tro,Accra,Ghana,route_based_collective,1000,0.049,0.415,0.626,0.9,0.5634,0.25,0.672,0.36,18,0.3853,TroTro_Accra
+IT_20,informal_transport,TroTro_Accra,Tro-tro,Accra,Ghana,route_based_collective,1000,0.044,0.454,0.599,0.9,0.5391,0.172,0.703,0.32,16,0.3781,TroTro_Accra
+IT_3,informal_transport,TroTro_Accra,Tro-tro,Accra,Ghana,route_based_collective,1000,0.054,0.466,0.602,0.9,0.5418,0.214,0.705,0.44,22,0.4055,TroTro_Accra
+IT_4,informal_transport,TroTro_Accra,Tro-tro,Accra,Ghana,route_based_collective,1000,0.061,0.465,0.578,0.9,0.5202,0.173,0.657,0.44,22,0.3911,TroTro_Accra
+IT_5,informal_transport,TroTro_Accra,Tro-tro,Accra,Ghana,route_based_collective,1000,0.056,0.45,0.608,0.9,0.5472,0.205,0.695,0.26,13,0.3744,TroTro_Accra
+IT_6,informal_transport,TroTro_Accra,Tro-tro,Accra,Ghana,route_based_collective,1000,0.04,0.463,0.601,0.9,0.5409,0.177,0.696,0.26,13,0.3699,TroTro_Accra
+IT_7,informal_transport,TroTro_Accra,Tro-tro,Accra,Ghana,route_based_collective,1000,0.064,0.396,0.599,0.9,0.5391,0.208,0.707,0.32,16,0.3747,TroTro_Accra
+IT_8,informal_transport,TroTro_Accra,Tro-tro,Accra,Ghana,route_based_collective,1000,0.046,0.476,0.592,0.9,0.5328,0.174,0.729,0.36,18,0.3917,TroTro_Accra
+IT_9,informal_transport,TroTro_Accra,Tro-tro,Accra,Ghana,route_based_collective,1000,0.032,0.395,0.642,0.9,0.5778,0.282,0.693,0.34,17,0.3841,TroTro_Accra
+IT_1,informal_transport,TukTuk_Bangkok,Tuk-tuk,Bangkok,Thailand,flexible_point_to_point,1000,0.166,0.324,0.555,0.62,0.3441,0.233,0.796,0.1,5,0.3245,TukTuk_Bangkok
+IT_10,informal_transport,TukTuk_Bangkok,Tuk-tuk,Bangkok,Thailand,flexible_point_to_point,1000,0.119,0.377,0.581,0.62,0.3602,0.203,0.794,0.1,5,0.3256,TukTuk_Bangkok
+IT_11,informal_transport,TukTuk_Bangkok,Tuk-tuk,Bangkok,Thailand,flexible_point_to_point,1000,0.171,0.339,0.563,0.62,0.3491,0.241,0.788,0.14,7,0.3351,TukTuk_Bangkok
+IT_12,informal_transport,TukTuk_Bangkok,Tuk-tuk,Bangkok,Thailand,flexible_point_to_point,1000,0.222,0.308,0.527,0.62,0.3267,0.267,0.827,0.1,5,0.3371,TukTuk_Bangkok
+IT_13,informal_transport,TukTuk_Bangkok,Tuk-tuk,Bangkok,Thailand,flexible_point_to_point,1000,0.167,0.327,0.549,0.62,0.3404,0.232,0.777,0.06,3,0.3156,TukTuk_Bangkok
+IT_14,informal_transport,TukTuk_Bangkok,Tuk-tuk,Bangkok,Thailand,flexible_point_to_point,1000,0.12,0.368,0.593,0.62,0.3677,0.22,0.804,0.18,9,0.3407,TukTuk_Bangkok
+IT_15,informal_transport,TukTuk_Bangkok,Tuk-tuk,Bangkok,Thailand,flexible_point_to_point,1000,0.242,0.271,0.505,0.62,0.3131,0.193,0.751,0.1,5,0.3122,TukTuk_Bangkok
+IT_16,informal_transport,TukTuk_Bangkok,Tuk-tuk,Bangkok,Thailand,flexible_point_to_point,1000,0.221,0.271,0.486,0.62,0.3013,0.189,0.777,0.12,6,0.3121,TukTuk_Bangkok
+IT_17,informal_transport,TukTuk_Bangkok,Tuk-tuk,Bangkok,Thailand,flexible_point_to_point,1000,0.121,0.334,0.557,0.62,0.3453,0.208,0.76,0.12,6,0.3129,TukTuk_Bangkok
+IT_18,informal_transport,TukTuk_Bangkok,Tuk-tuk,Bangkok,Thailand,flexible_point_to_point,1000,0.266,0.355,0.411,0.62,0.2548,0.101,0.842,0.12,6,0.3296,TukTuk_Bangkok
+IT_19,informal_transport,TukTuk_Bangkok,Tuk-tuk,Bangkok,Thailand,flexible_point_to_point,1000,0.069,0.339,0.652,0.62,0.4042,0.269,0.757,0.14,7,0.3239,TukTuk_Bangkok
+IT_2,informal_transport,TukTuk_Bangkok,Tuk-tuk,Bangkok,Thailand,flexible_point_to_point,1000,0.067,0.376,0.659,0.62,0.4086,0.26,0.741,0.06,3,0.3165,TukTuk_Bangkok
+IT_20,informal_transport,TukTuk_Bangkok,Tuk-tuk,Bangkok,Thailand,flexible_point_to_point,1000,0.173,0.344,0.549,0.62,0.3404,0.218,0.818,0.18,9,0.343,TukTuk_Bangkok
+IT_3,informal_transport,TukTuk_Bangkok,Tuk-tuk,Bangkok,Thailand,flexible_point_to_point,1000,0.08,0.375,0.594,0.62,0.3683,0.22,0.748,0.14,7,0.3199,TukTuk_Bangkok
+IT_4,informal_transport,TukTuk_Bangkok,Tuk-tuk,Bangkok,Thailand,flexible_point_to_point,1000,0.272,0.277,0.454,0.62,0.2815,0.158,0.791,0.24,12,0.3365,TukTuk_Bangkok
+IT_5,informal_transport,TukTuk_Bangkok,Tuk-tuk,Bangkok,Thailand,flexible_point_to_point,1000,0.063,0.363,0.637,0.62,0.3949,0.271,0.788,0.02,1,0.3125,TukTuk_Bangkok
+IT_6,informal_transport,TukTuk_Bangkok,Tuk-tuk,Bangkok,Thailand,flexible_point_to_point,1000,0.176,0.341,0.513,0.62,0.3181,0.2,0.744,0.2,10,0.3286,TukTuk_Bangkok
+IT_7,informal_transport,TukTuk_Bangkok,Tuk-tuk,Bangkok,Thailand,flexible_point_to_point,1000,0.079,0.426,0.606,0.62,0.3757,0.215,0.811,0.2,10,0.3493,TukTuk_Bangkok
+IT_8,informal_transport,TukTuk_Bangkok,Tuk-tuk,Bangkok,Thailand,flexible_point_to_point,1000,0.071,0.402,0.598,0.62,0.3708,0.197,0.737,0.1,5,0.314,TukTuk_Bangkok
+IT_9,informal_transport,TukTuk_Bangkok,Tuk-tuk,Bangkok,Thailand,flexible_point_to_point,1000,0.038,0.381,0.64,0.62,0.3968,0.243,0.737,0.02,1,0.301,TukTuk_Bangkok
+IT_1,informal_transport,AutoRickshaw_NewDelhi,Auto-rickshaw,New Delhi,India,flexible_point_to_point,1000,0.235,0.243,0.556,0.68,0.3781,0.258,0.878,0.1,5,0.3437,AutoRickshaw_NewDelhi
+IT_10,informal_transport,AutoRickshaw_NewDelhi,Auto-rickshaw,New Delhi,India,flexible_point_to_point,1000,0.189,0.291,0.581,0.68,0.3951,0.239,0.859,0.14,7,0.3488,AutoRickshaw_NewDelhi
+IT_11,informal_transport,AutoRickshaw_NewDelhi,Auto-rickshaw,New Delhi,India,flexible_point_to_point,1000,0.074,0.328,0.681,0.68,0.4631,0.316,0.868,0.1,5,0.3498,AutoRickshaw_NewDelhi
+IT_12,informal_transport,AutoRickshaw_NewDelhi,Auto-rickshaw,New Delhi,India,flexible_point_to_point,1000,0.18,0.286,0.582,0.68,0.3958,0.213,0.857,0.12,6,0.3402,AutoRickshaw_NewDelhi
+IT_13,informal_transport,AutoRickshaw_NewDelhi,Auto-rickshaw,New Delhi,India,flexible_point_to_point,1000,0.122,0.299,0.634,0.68,0.4311,0.286,0.87,0.1,5,0.3445,AutoRickshaw_NewDelhi
+IT_14,informal_transport,AutoRickshaw_NewDelhi,Auto-rickshaw,New Delhi,India,flexible_point_to_point,1000,0.063,0.292,0.74,0.68,0.5032,0.344,0.833,0.08,4,0.343,AutoRickshaw_NewDelhi
+IT_15,informal_transport,AutoRickshaw_NewDelhi,Auto-rickshaw,New Delhi,India,flexible_point_to_point,1000,0.015,0.34,0.74,0.68,0.5032,0.289,0.833,0.1,5,0.3405,AutoRickshaw_NewDelhi
+IT_16,informal_transport,AutoRickshaw_NewDelhi,Auto-rickshaw,New Delhi,India,flexible_point_to_point,1000,0.179,0.254,0.626,0.68,0.4257,0.286,0.899,0.12,6,0.3532,AutoRickshaw_NewDelhi
+IT_17,informal_transport,AutoRickshaw_NewDelhi,Auto-rickshaw,New Delhi,India,flexible_point_to_point,1000,0.183,0.304,0.554,0.68,0.3767,0.212,0.879,0.12,6,0.3438,AutoRickshaw_NewDelhi
+IT_18,informal_transport,AutoRickshaw_NewDelhi,Auto-rickshaw,New Delhi,India,flexible_point_to_point,1000,0.234,0.229,0.573,0.68,0.3896,0.286,0.866,0.16,8,0.353,AutoRickshaw_NewDelhi
+IT_19,informal_transport,AutoRickshaw_NewDelhi,Auto-rickshaw,New Delhi,India,flexible_point_to_point,1000,0.183,0.352,0.547,0.68,0.372,0.193,0.871,0.08,4,0.3433,AutoRickshaw_NewDelhi
+IT_2,informal_transport,AutoRickshaw_NewDelhi,Auto-rickshaw,New Delhi,India,flexible_point_to_point,1000,0.243,0.259,0.536,0.68,0.3645,0.224,0.861,0.24,12,0.3608,AutoRickshaw_NewDelhi
+IT_20,informal_transport,AutoRickshaw_NewDelhi,Auto-rickshaw,New Delhi,India,flexible_point_to_point,1000,0.122,0.3,0.648,0.68,0.4406,0.272,0.891,0.04,2,0.3394,AutoRickshaw_NewDelhi
+IT_3,informal_transport,AutoRickshaw_NewDelhi,Auto-rickshaw,New Delhi,India,flexible_point_to_point,1000,0.179,0.309,0.575,0.68,0.391,0.218,0.903,0.12,6,0.351,AutoRickshaw_NewDelhi
+IT_4,informal_transport,AutoRickshaw_NewDelhi,Auto-rickshaw,New Delhi,India,flexible_point_to_point,1000,0.181,0.3,0.586,0.68,0.3985,0.221,0.905,0.14,7,0.3547,AutoRickshaw_NewDelhi
+IT_5,informal_transport,AutoRickshaw_NewDelhi,Auto-rickshaw,New Delhi,India,flexible_point_to_point,1000,0.068,0.324,0.701,0.68,0.4767,0.328,0.838,0.12,6,0.3502,AutoRickshaw_NewDelhi
+IT_6,informal_transport,AutoRickshaw_NewDelhi,Auto-rickshaw,New Delhi,India,flexible_point_to_point,1000,0.179,0.288,0.589,0.68,0.4005,0.245,0.848,0.12,6,0.3432,AutoRickshaw_NewDelhi
+IT_7,informal_transport,AutoRickshaw_NewDelhi,Auto-rickshaw,New Delhi,India,flexible_point_to_point,1000,0.025,0.318,0.768,0.68,0.5222,0.368,0.872,0.24,12,0.3766,AutoRickshaw_NewDelhi
+IT_8,informal_transport,AutoRickshaw_NewDelhi,Auto-rickshaw,New Delhi,India,flexible_point_to_point,1000,0.288,0.256,0.506,0.68,0.3441,0.199,0.911,0.14,7,0.3552,AutoRickshaw_NewDelhi
+IT_9,informal_transport,AutoRickshaw_NewDelhi,Auto-rickshaw,New Delhi,India,flexible_point_to_point,1000,0.132,0.354,0.598,0.68,0.4066,0.206,0.905,0.14,7,0.3559,AutoRickshaw_NewDelhi
+IT_1,informal_transport,BodaBoda_Kampala,Boda-boda,Kampala,Uganda,flexible_point_to_point,1000,0.361,0.161,0.433,0.22,0.0953,0.173,0.888,0.06,3,0.283,BodaBoda_Kampala
+IT_10,informal_transport,BodaBoda_Kampala,Boda-boda,Kampala,Uganda,flexible_point_to_point,1000,0.362,0.145,0.448,0.22,0.0986,0.229,0.878,0.06,3,0.2847,BodaBoda_Kampala
+IT_11,informal_transport,BodaBoda_Kampala,Boda-boda,Kampala,Uganda,flexible_point_to_point,1000,0.367,0.179,0.397,0.22,0.0873,0.146,0.814,0.08,4,0.2754,BodaBoda_Kampala
+IT_12,informal_transport,BodaBoda_Kampala,Boda-boda,Kampala,Uganda,flexible_point_to_point,1000,0.227,0.171,0.596,0.22,0.1311,0.295,0.78,0.06,3,0.2613,BodaBoda_Kampala
+IT_13,informal_transport,BodaBoda_Kampala,Boda-boda,Kampala,Uganda,flexible_point_to_point,1000,0.36,0.169,0.44,0.22,0.0968,0.188,0.883,0.02,1,0.2794,BodaBoda_Kampala
+IT_14,informal_transport,BodaBoda_Kampala,Boda-boda,Kampala,Uganda,flexible_point_to_point,1000,0.23,0.181,0.549,0.22,0.1208,0.262,0.834,0.12,6,0.2757,BodaBoda_Kampala
+IT_15,informal_transport,BodaBoda_Kampala,Boda-boda,Kampala,Uganda,flexible_point_to_point,1000,0.275,0.148,0.516,0.22,0.1135,0.251,0.821,0.12,6,0.2736,BodaBoda_Kampala
+IT_16,informal_transport,BodaBoda_Kampala,Boda-boda,Kampala,Uganda,flexible_point_to_point,1000,0.274,0.169,0.516,0.22,0.1135,0.228,0.841,0.04,2,0.2663,BodaBoda_Kampala
+IT_17,informal_transport,BodaBoda_Kampala,Boda-boda,Kampala,Uganda,flexible_point_to_point,1000,0.273,0.168,0.55,0.22,0.121,0.274,0.868,0.06,3,0.279,BodaBoda_Kampala
+IT_18,informal_transport,BodaBoda_Kampala,Boda-boda,Kampala,Uganda,flexible_point_to_point,1000,0.181,0.209,0.623,0.22,0.1371,0.294,0.796,0.02,1,0.2572,BodaBoda_Kampala
+IT_19,informal_transport,BodaBoda_Kampala,Boda-boda,Kampala,Uganda,flexible_point_to_point,1000,0.362,0.161,0.441,0.22,0.097,0.19,0.842,0.08,4,0.2813,BodaBoda_Kampala
+IT_2,informal_transport,BodaBoda_Kampala,Boda-boda,Kampala,Uganda,flexible_point_to_point,1000,0.386,0.141,0.431,0.22,0.0948,0.165,0.854,0.08,4,0.281,BodaBoda_Kampala
+IT_20,informal_transport,BodaBoda_Kampala,Boda-boda,Kampala,Uganda,flexible_point_to_point,1000,0.272,0.177,0.515,0.22,0.1133,0.239,0.848,0.06,3,0.2726,BodaBoda_Kampala
+IT_3,informal_transport,BodaBoda_Kampala,Boda-boda,Kampala,Uganda,flexible_point_to_point,1000,0.232,0.149,0.615,0.22,0.1353,0.313,0.734,0.08,4,0.2567,BodaBoda_Kampala
+IT_4,informal_transport,BodaBoda_Kampala,Boda-boda,Kampala,Uganda,flexible_point_to_point,1000,0.36,0.148,0.443,0.22,0.0975,0.219,0.827,0.04,2,0.273,BodaBoda_Kampala
+IT_5,informal_transport,BodaBoda_Kampala,Boda-boda,Kampala,Uganda,flexible_point_to_point,1000,0.295,0.17,0.505,0.22,0.1111,0.215,0.813,0.04,2,0.2647,BodaBoda_Kampala
+IT_6,informal_transport,BodaBoda_Kampala,Boda-boda,Kampala,Uganda,flexible_point_to_point,1000,0.216,0.174,0.582,0.22,0.128,0.274,0.815,0.04,2,0.2593,BodaBoda_Kampala
+IT_7,informal_transport,BodaBoda_Kampala,Boda-boda,Kampala,Uganda,flexible_point_to_point,1000,0.405,0.121,0.418,0.22,0.092,0.209,0.821,0.08,4,0.2796,BodaBoda_Kampala
+IT_8,informal_transport,BodaBoda_Kampala,Boda-boda,Kampala,Uganda,flexible_point_to_point,1000,0.145,0.214,0.637,0.22,0.1401,0.301,0.853,0.04,2,0.2639,BodaBoda_Kampala
+IT_9,informal_transport,BodaBoda_Kampala,Boda-boda,Kampala,Uganda,flexible_point_to_point,1000,0.317,0.158,0.491,0.22,0.108,0.233,0.804,0.1,5,0.2755,BodaBoda_Kampala
+IT_1,informal_transport,Jitney_USA,Jitney,United States,USA,route_flexible_collective,1000,0.123,0.411,0.519,0.86,0.4463,0.121,0.212,0.26,13,0.279,Jitney_USA
+IT_10,informal_transport,Jitney_USA,Jitney,United States,USA,route_flexible_collective,1000,0.106,0.31,0.574,0.86,0.4936,0.194,0.17,0.16,8,0.2508,Jitney_USA
+IT_11,informal_transport,Jitney_USA,Jitney,United States,USA,route_flexible_collective,1000,0.07,0.354,0.598,0.86,0.5143,0.211,0.096,0.14,7,0.2442,Jitney_USA
+IT_12,informal_transport,Jitney_USA,Jitney,United States,USA,route_flexible_collective,1000,0.079,0.343,0.604,0.86,0.5194,0.222,0.188,0.1,5,0.2537,Jitney_USA
+IT_13,informal_transport,Jitney_USA,Jitney,United States,USA,route_flexible_collective,1000,0.083,0.358,0.594,0.86,0.5108,0.191,0.18,0.22,11,0.2695,Jitney_USA
+IT_14,informal_transport,Jitney_USA,Jitney,United States,USA,route_flexible_collective,1000,0.09,0.365,0.571,0.86,0.4911,0.218,0.134,0.24,12,0.2671,Jitney_USA
+IT_15,informal_transport,Jitney_USA,Jitney,United States,USA,route_flexible_collective,1000,0.071,0.404,0.577,0.86,0.4962,0.142,0.14,0.24,12,0.2654,Jitney_USA
+IT_16,informal_transport,Jitney_USA,Jitney,United States,USA,route_flexible_collective,1000,0.059,0.356,0.606,0.86,0.5212,0.191,0.196,0.16,8,0.2597,Jitney_USA
+IT_17,informal_transport,Jitney_USA,Jitney,United States,USA,route_flexible_collective,1000,0.126,0.371,0.501,0.86,0.4309,0.152,0.141,0.2,10,0.2519,Jitney_USA
+IT_18,informal_transport,Jitney_USA,Jitney,United States,USA,route_flexible_collective,1000,0.103,0.339,0.611,0.86,0.5255,0.221,0.14,0.16,8,0.2606,Jitney_USA
+IT_19,informal_transport,Jitney_USA,Jitney,United States,USA,route_flexible_collective,1000,0.105,0.346,0.575,0.86,0.4945,0.192,0.166,0.2,10,0.2632,Jitney_USA
+IT_2,informal_transport,Jitney_USA,Jitney,United States,USA,route_flexible_collective,1000,0.108,0.386,0.566,0.86,0.4868,0.162,0.141,0.2,10,0.2635,Jitney_USA
+IT_20,informal_transport,Jitney_USA,Jitney,United States,USA,route_flexible_collective,1000,0.094,0.431,0.542,0.86,0.4661,0.156,0.155,0.2,10,0.2671,Jitney_USA
+IT_3,informal_transport,Jitney_USA,Jitney,United States,USA,route_flexible_collective,1000,0.096,0.363,0.562,0.86,0.4833,0.158,0.176,0.12,6,0.2487,Jitney_USA
+IT_4,informal_transport,Jitney_USA,Jitney,United States,USA,route_flexible_collective,1000,0.096,0.412,0.558,0.86,0.4799,0.155,0.159,0.22,11,0.2699,Jitney_USA
+IT_5,informal_transport,Jitney_USA,Jitney,United States,USA,route_flexible_collective,1000,0.114,0.38,0.559,0.86,0.4807,0.142,0.137,0.3,15,0.2747,Jitney_USA
+IT_6,informal_transport,Jitney_USA,Jitney,United States,USA,route_flexible_collective,1000,0.067,0.38,0.601,0.86,0.5169,0.174,0.16,0.26,13,0.2732,Jitney_USA
+IT_7,informal_transport,Jitney_USA,Jitney,United States,USA,route_flexible_collective,1000,0.081,0.379,0.579,0.86,0.4979,0.169,0.197,0.18,9,0.265,Jitney_USA
+IT_8,informal_transport,Jitney_USA,Jitney,United States,USA,route_flexible_collective,1000,0.049,0.347,0.612,0.86,0.5263,0.234,0.116,0.2,10,0.2553,Jitney_USA
+IT_9,informal_transport,Jitney_USA,Jitney,United States,USA,route_flexible_collective,1000,0.091,0.384,0.575,0.86,0.4945,0.186,0.108,0.18,9,0.2557,Jitney_USA

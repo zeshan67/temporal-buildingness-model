@@ -1,0 +1,11 @@
+scenario_name,agent_type,mode_name,display_name,city,country,movement_family,agent_count,mean_TBI,mean_anchoring_score,mean_thresholding_score,mean_occupied_score_raw,mean_enclosure_factor,mean_interiority_score,mean_pausing_score,mean_edge_coupling_score,mean_rhythmic_repetition_score,mean_completed_cycles
+conventional_baseline,conventional_vehicle,,,,,,20,0.0146,0.0,0.0,0.0,0.0,0.0,0.0205,0.0838,0.0,0.0
+Jitney_USA,informal_transport,Jitney_USA,Jitney,United States,USA,route_flexible_collective,20,0.2619,0.0905,0.371,0.5742,0.86,0.4938,0.1796,0.1556,0.197,9.85
+BodaBoda_Kampala,informal_transport,BodaBoda_Kampala,Boda-boda,Kampala,Uganda,flexible_point_to_point,20,0.2722,0.295,0.1657,0.5073,0.22,0.1116,0.2349,0.8307,0.064,3.2
+TukTuk_Bangkok,informal_transport,TukTuk_Bangkok,Tuk-tuk,Bangkok,Thailand,flexible_point_to_point,20,0.3245,0.1452,0.3449,0.5614,0.62,0.3481,0.2169,0.7794,0.122,6.1
+Rickshaw_Dhaka,informal_transport,Rickshaw_Dhaka,Rickshaw,Dhaka,Bangladesh,flexible_point_to_point,20,0.3455,0.2881,0.255,0.4948,0.7,0.3464,0.204,0.9046,0.077,3.85
+AutoRickshaw_NewDelhi,informal_transport,AutoRickshaw_NewDelhi,Auto-rickshaw,New Delhi,India,flexible_point_to_point,20,0.3495,0.1537,0.2963,0.616,0.68,0.4189,0.2602,0.8724,0.126,6.3
+Colectivo_Pesero_MexicoCity,informal_transport,Colectivo_Pesero_MexicoCity,Colectivo / Pesero,Mexico City,Mexico,route_based_collective,20,0.3753,0.0316,0.3352,0.6755,0.88,0.5944,0.2769,0.784,0.252,12.6
+TroTro_Accra,informal_transport,TroTro_Accra,Tro-tro,Accra,Ghana,route_based_collective,20,0.3843,0.0549,0.4516,0.5896,0.9,0.5307,0.19,0.6844,0.368,18.4
+Matatu_Nairobi,informal_transport,Matatu_Nairobi,Matatu,Nairobi,Kenya,route_based_collective,20,0.3849,0.0367,0.3595,0.6569,0.92,0.6044,0.251,0.7655,0.299,14.95
+Jeepney_Manila,informal_transport,Jeepney_Manila,Jeepney,Manila,Philippines,route_based_collective,20,0.4031,0.0355,0.467,0.6056,0.9,0.5451,0.2015,0.8534,0.303,15.15

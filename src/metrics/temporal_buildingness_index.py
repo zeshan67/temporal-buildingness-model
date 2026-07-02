@@ -16,6 +16,11 @@ TBI dimensions:
 Important conceptual rule:
 A completed passenger trip is NOT automatically a buildingness cycle.
 Rhythmic repetition requires anchor-related behavior.
+
+Mode profile update:
+Interiority is now adjusted by enclosure_factor.
+For example, a boda-boda can carry a passenger but provides less enclosure
+than a jeepney, matatu, or tro-tro.
 """
 
 from pathlib import Path
@@ -96,6 +101,11 @@ def prepare_log_columns(logs_df: pd.DataFrame) -> pd.DataFrame:
 
         logs_df[column] = convert_to_bool(logs_df[column])
 
+    if "repair_delay_event" not in logs_df.columns:
+        logs_df["repair_delay_event"] = False
+
+    logs_df["repair_delay_event"] = convert_to_bool(logs_df["repair_delay_event"])
+
     if "occupancy" not in logs_df.columns:
         logs_df["occupancy"] = 0
 
@@ -107,6 +117,26 @@ def prepare_log_columns(logs_df: pd.DataFrame) -> pd.DataFrame:
 
     if "agent_id" not in logs_df.columns:
         raise ValueError("Log file must contain an 'agent_id' column.")
+
+    if "mode_name" not in logs_df.columns:
+        logs_df["mode_name"] = ""
+
+    if "display_name" not in logs_df.columns:
+        logs_df["display_name"] = ""
+
+    if "city" not in logs_df.columns:
+        logs_df["city"] = ""
+
+    if "country" not in logs_df.columns:
+        logs_df["country"] = ""
+
+    if "movement_family" not in logs_df.columns:
+        logs_df["movement_family"] = ""
+
+    if "enclosure_factor" not in logs_df.columns:
+        logs_df["enclosure_factor"] = 0.0
+
+    logs_df["enclosure_factor"] = logs_df["enclosure_factor"].fillna(0.0).astype(float)
 
     return logs_df
 
@@ -121,10 +151,9 @@ def calculate_agent_tbi(
 
     Core conceptual rule:
     Rhythmic repetition only counts if the agent has anchor-related behavior.
-    This prevents informal_no_anchors from receiving false buildingness cycles.
 
-    A trip can include thresholding and interiority without becoming a full
-    buildingness rhythm cycle.
+    Mode update:
+    Interiority is multiplied by enclosure_factor.
     """
 
     total_timesteps = len(agent_logs)
@@ -135,8 +164,13 @@ def calculate_agent_tbi(
     agent_id = agent_logs["agent_id"].iloc[0]
     agent_type = agent_logs["agent_type"].iloc[0]
 
+    mode_name = str(agent_logs["mode_name"].iloc[0])
+    display_name = str(agent_logs["display_name"].iloc[0])
+    city = str(agent_logs["city"].iloc[0])
+    country = str(agent_logs["country"].iloc[0])
+    movement_family = str(agent_logs["movement_family"].iloc[0])
+
     # 1. Anchoring
-    # Measures how much time the agent spends in the explicit anchor-waiting state.
     anchoring_steps = (
         agent_logs["state"].astype(str).eq("IDLE_AT_ANCHOR")
     ).sum()
@@ -144,27 +178,26 @@ def calculate_agent_tbi(
     anchoring_score = anchoring_steps / total_timesteps
 
     # 2. Thresholding
-    # Measures boarding and alighting threshold moments.
     thresholding_score = agent_logs["threshold_event"].sum() / total_timesteps
 
     # 3. Interiority
-    # Measures time when the agent contains/carries a passenger.
-    interiority_score = (
+    # Occupied movement is adjusted by enclosure quality.
+    occupied_score_raw = (
         agent_logs["occupancy"].astype(float).gt(0).sum()
         / total_timesteps
     )
 
+    mean_enclosure_factor = float(agent_logs["enclosure_factor"].mean())
+
+    interiority_score = occupied_score_raw * mean_enclosure_factor
+
     # 4. Pausing
-    # Measures temporary stops that produce micro-occupation in the street.
     pausing_score = agent_logs["pause_event"].sum() / total_timesteps
 
     # 5. Edge Coupling
-    # Measures how often the agent is near active street-edge conditions.
     edge_coupling_score = agent_logs["near_active_edge"].sum() / total_timesteps
 
     # 6. Rhythmic Repetition
-    # A completed passenger trip is only counted as a buildingness cycle if
-    # the agent has anchor-related behavior.
     has_anchor_behavior = (
         anchoring_steps > 0
         or agent_logs["near_anchor"].sum() > 0
@@ -192,9 +225,16 @@ def calculate_agent_tbi(
     return {
         "agent_id": agent_id,
         "agent_type": agent_type,
+        "mode_name": mode_name,
+        "display_name": display_name,
+        "city": city,
+        "country": country,
+        "movement_family": movement_family,
         "total_timesteps": total_timesteps,
         "anchoring_score": round(float(anchoring_score), 4),
         "thresholding_score": round(float(thresholding_score), 4),
+        "occupied_score_raw": round(float(occupied_score_raw), 4),
+        "enclosure_factor": round(float(mean_enclosure_factor), 4),
         "interiority_score": round(float(interiority_score), 4),
         "pausing_score": round(float(pausing_score), 4),
         "edge_coupling_score": round(float(edge_coupling_score), 4),
@@ -244,10 +284,17 @@ def create_scenario_summary(agent_scores_df: pd.DataFrame) -> pd.DataFrame:
         .groupby("scenario_name")
         .agg(
             agent_type=("agent_type", "first"),
+            mode_name=("mode_name", "first"),
+            display_name=("display_name", "first"),
+            city=("city", "first"),
+            country=("country", "first"),
+            movement_family=("movement_family", "first"),
             agent_count=("agent_id", "count"),
             mean_TBI=("TBI", "mean"),
             mean_anchoring_score=("anchoring_score", "mean"),
             mean_thresholding_score=("thresholding_score", "mean"),
+            mean_occupied_score_raw=("occupied_score_raw", "mean"),
+            mean_enclosure_factor=("enclosure_factor", "mean"),
             mean_interiority_score=("interiority_score", "mean"),
             mean_pausing_score=("pausing_score", "mean"),
             mean_edge_coupling_score=("edge_coupling_score", "mean"),
@@ -262,19 +309,30 @@ def create_scenario_summary(agent_scores_df: pd.DataFrame) -> pd.DataFrame:
     for column in numeric_columns:
         summary_df[column] = summary_df[column].round(4)
 
-    summary_df["scenario_name"] = pd.Categorical(
-        summary_df["scenario_name"],
-        categories=SCENARIO_ORDER,
-        ordered=True,
-    )
+    known_scenarios = set(SCENARIO_ORDER)
+    current_scenarios = set(summary_df["scenario_name"].astype(str))
 
-    summary_df = (
-        summary_df
-        .sort_values("scenario_name")
-        .reset_index(drop=True)
-    )
+    if current_scenarios.issubset(known_scenarios):
+        summary_df["scenario_name"] = pd.Categorical(
+            summary_df["scenario_name"],
+            categories=SCENARIO_ORDER,
+            ordered=True,
+        )
 
-    summary_df["scenario_name"] = summary_df["scenario_name"].astype(str)
+        summary_df = (
+            summary_df
+            .sort_values("scenario_name")
+            .reset_index(drop=True)
+        )
+
+        summary_df["scenario_name"] = summary_df["scenario_name"].astype(str)
+
+    else:
+        summary_df = (
+            summary_df
+            .sort_values("mean_TBI")
+            .reset_index(drop=True)
+        )
 
     return summary_df
 
@@ -307,17 +365,24 @@ def plot_tbi_comparison(scenario_summary_df: pd.DataFrame) -> Path:
 
     plot_df = scenario_summary_df.copy()
 
-    plt.figure(figsize=(10, 5))
+    label_column = "scenario_name"
+
+    if "mode_name" in plot_df.columns:
+        non_empty_modes = plot_df["mode_name"].astype(str).str.len().sum()
+        if non_empty_modes > 0:
+            label_column = "mode_name"
+
+    plt.figure(figsize=(11, 5))
 
     plt.bar(
-        plot_df["scenario_name"],
+        plot_df[label_column],
         plot_df["mean_TBI"],
     )
 
     plt.title("Temporal Buildingness Index Comparison")
-    plt.xlabel("Scenario")
+    plt.xlabel("Scenario / Mode")
     plt.ylabel("Mean TBI")
-    plt.xticks(rotation=25, ha="right")
+    plt.xticks(rotation=30, ha="right")
     plt.tight_layout()
 
     output_path = OUTPUT_FIGURES_DIR / "tbi_comparison.png"
@@ -386,10 +451,6 @@ def print_core_comparison(scenario_summary_df: pd.DataFrame) -> None:
 def print_scenario_diagnostics(scenario_summary_df: pd.DataFrame) -> None:
     """
     Print diagnostic checks for theoretical scenario behavior.
-
-    These checks do not stop the code.
-    They help us understand whether the current model calibration behaves
-    according to the theoretical expectations.
     """
 
     conventional = get_scenario_value(
@@ -428,9 +489,12 @@ def print_scenario_diagnostics(scenario_summary_df: pd.DataFrame) -> None:
         "mean_rhythmic_repetition_score",
     )
 
+    if conventional is None:
+        return
+
     print("\nScenario diagnostics:")
 
-    if conventional is not None and no_anchors is not None:
+    if no_anchors is not None:
         if no_anchors > conventional:
             print("PASS: informal_no_anchors has higher TBI than conventional_baseline.")
         else:
@@ -451,7 +515,7 @@ def print_scenario_diagnostics(scenario_summary_df: pd.DataFrame) -> None:
         else:
             print(
                 "CHECK: informal_with_anchors does not exceed informal_no_anchors. "
-                "This suggests scenario calibration is still needed."
+                "This suggests scenario calibration may be needed."
             )
 
     if with_anchors is not None and high_pedestrian is not None:
@@ -475,9 +539,6 @@ def print_scenario_diagnostics(scenario_summary_df: pd.DataFrame) -> None:
 def print_tbi_summary(scenario_summary_df: pd.DataFrame) -> None:
     """
     Print a readable summary of TBI results.
-
-    This version forces pandas to show all columns so important values
-    are not hidden behind ellipses.
     """
 
     print("Temporal Buildingness Index calculation completed.")
@@ -485,10 +546,15 @@ def print_tbi_summary(scenario_summary_df: pd.DataFrame) -> None:
     display_columns = [
         "scenario_name",
         "agent_type",
+        "mode_name",
+        "city",
+        "movement_family",
         "agent_count",
         "mean_TBI",
         "mean_anchoring_score",
         "mean_thresholding_score",
+        "mean_occupied_score_raw",
+        "mean_enclosure_factor",
         "mean_interiority_score",
         "mean_pausing_score",
         "mean_edge_coupling_score",
@@ -496,14 +562,19 @@ def print_tbi_summary(scenario_summary_df: pd.DataFrame) -> None:
         "mean_completed_cycles",
     ]
 
+    existing_display_columns = [
+        column for column in display_columns
+        if column in scenario_summary_df.columns
+    ]
+
     print("\nScenario summary:")
 
     with pd.option_context(
         "display.max_columns", None,
-        "display.width", 220,
+        "display.width", 260,
         "display.max_colwidth", None,
     ):
-        print(scenario_summary_df[display_columns].to_string(index=False))
+        print(scenario_summary_df[existing_display_columns].to_string(index=False))
 
     print_core_comparison(scenario_summary_df)
     print_scenario_diagnostics(scenario_summary_df)

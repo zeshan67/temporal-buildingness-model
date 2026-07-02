@@ -1,6 +1,3 @@
-scenario_name,agent_type,agent_count,mean_TBI,mean_anchoring_score,mean_thresholding_score,mean_interiority_score,mean_pausing_score,mean_edge_coupling_score,mean_rhythmic_repetition_score,mean_completed_cycles
-conventional_baseline,conventional_vehicle,20,0.002,0.0,0.0,0.0,0.0205,0.0,0.0,0.0
-informal_no_anchors,informal_transport,20,0.238,0.0,0.4796,0.637,0.0895,0.0384,0.0,0.0
-informal_with_anchors,informal_transport,20,0.3251,0.6269,0.1367,0.1804,0.0242,0.6682,0.224,11.2
-high_pedestrian_intensity,informal_transport,20,0.4496,0.0906,0.428,0.5736,0.0786,0.7842,0.705,35.25
-regulation_disruption,informal_transport,20,0.3217,0.2073,0.3333,0.4818,0.0764,0.1768,0.554,27.7
+scenario_name,agent_type,mode_name,display_name,city,country,movement_family,agent_count,mean_TBI,mean_anchoring_score,mean_thresholding_score,mean_occupied_score_raw,mean_enclosure_factor,mean_interiority_score,mean_pausing_score,mean_edge_coupling_score,mean_rhythmic_repetition_score,mean_completed_cycles
+conventional_baseline,conventional_vehicle,,,,,,20,0.0146,0.0,0.0,0.0,0.0,0.0,0.0205,0.0838,0.0,0.0
+informal_with_anchors,informal_transport,Rickshaw_Dhaka,Rickshaw,Dhaka,Bangladesh,flexible_point_to_point,20,0.278,0.1276,0.3143,0.6192,0.7,0.4335,0.2469,0.4295,0.092,4.6
