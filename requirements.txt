@@ -6,5 +6,5 @@ pyyaml
 scipy
 jupyter
 ipykernel
-streamlit
-plotly
+fastapi
+uvicorn

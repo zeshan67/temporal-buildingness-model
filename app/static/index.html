@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Temporal Buildingness Model</title>
+
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+
+<body>
+  <div class="app-shell">
+    <header class="top-bar">
+      <div>
+        <p class="eyebrow">Temporal Digital Popular Public Transport</p>
+        <h1>Temporal Buildingness Model</h1>
+        <p class="subtitle">
+          Motion-driven replay of informal transport agents, state transitions,
+          and live Temporal Buildingness Index components.
+        </p>
+      </div>
+
+      <div class="status-pill" id="serverStatus">
+        Connecting
+      </div>
+    </header>
+
+    <main class="dashboard-grid">
+      <section class="control-panel panel">
+        <h2>Simulation Controls</h2>
+
+        <label for="modeSelect">Transport mode</label>
+        <select id="modeSelect"></select>
+
+        <div class="control-row">
+          <button id="playButton" class="primary-button">Play</button>
+          <button id="resetButton" class="secondary-button">Reset</button>
+        </div>
+
+        <label for="stepSlider">Timestep</label>
+        <input type="range" id="stepSlider" min="0" max="999" value="0" />
+        <div class="step-readout">
+          <span>Step</span>
+          <strong id="stepValue">0</strong>
+        </div>
+
+        <label for="speedSelect">Playback speed</label>
+        <select id="speedSelect">
+          <option value="700">Slow</option>
+          <option value="350" selected>Medium</option>
+          <option value="150">Fast</option>
+          <option value="60">Very fast</option>
+        </select>
+
+        <label for="agentLimit">Agents displayed</label>
+        <input type="range" id="agentLimit" min="5" max="20" value="20" />
+        <div class="step-readout">
+          <span>Agents</span>
+          <strong id="agentLimitValue">20</strong>
+        </div>
+
+        <div class="mode-card">
+          <h3>Mode Information</h3>
+          <dl id="modeInfo"></dl>
+        </div>
+      </section>
+
+      <section class="simulation-panel panel">
+        <div class="section-heading">
+          <div>
+            <h2>Agent-Based Motion Viewer</h2>
+            <p>
+              Agents are drawn on the synthetic 12 × 12 street graph. Color shows state;
+              size increases with occupancy.
+            </p>
+          </div>
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas id="simulationCanvas" width="900" height="650"></canvas>
+        </div>
+
+        <div class="legend" id="stateLegend"></div>
+      </section>
+
+      <section class="metrics-panel panel">
+        <h2>Live TBI Components</h2>
+
+        <div class="metric-grid">
+          <div class="metric-card highlight">
+            <span>Live TBI</span>
+            <strong id="metricLiveTbi">0.0000</strong>
+          </div>
+
+          <div class="metric-card">
+            <span>Anchoring</span>
+            <strong id="metricAnchoring">0.0000</strong>
+          </div>
+
+          <div class="metric-card">
+            <span>Thresholding</span>
+            <strong id="metricThresholding">0.0000</strong>
+          </div>
+
+          <div class="metric-card">
+            <span>Interiority</span>
+            <strong id="metricInteriority">0.0000</strong>
+          </div>
+
+          <div class="metric-card">
+            <span>Edge Coupling</span>
+            <strong id="metricEdgeCoupling">0.0000</strong>
+          </div>
+
+          <div class="metric-card">
+            <span>Rhythmic Repetition</span>
+            <strong id="metricRhythm">0.0000</strong>
+          </div>
+        </div>
+
+        <h3>Dimension Bars</h3>
+        <div class="bar-chart" id="dimensionBars"></div>
+
+        <h3>Current State Counts</h3>
+        <div class="compact-table" id="currentStateCounts"></div>
+      </section>
+
+      <section class="analysis-panel panel">
+        <div class="section-heading">
+          <div>
+            <h2>Mode Comparison Summary</h2>
+            <p>
+              Final TBI output from the multi-mode comparison runner.
+            </p>
+          </div>
+        </div>
+
+        <div class="summary-chart" id="summaryBars"></div>
+        <div class="data-table-wrap">
+          <table id="summaryTable"></table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
