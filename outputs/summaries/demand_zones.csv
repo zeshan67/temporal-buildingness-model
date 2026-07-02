@@ -1,0 +1,6 @@
+zone_id,node_id,zone_type,demand_intensity,peak_start,peak_end,waiting_tolerance,trip_distance_preference
+DZ_1,N_6_9,market_edge,0.649,205,892,0.833,0.672
+DZ_2,N_4_0,hospital_entrance,0.665,125,851,0.56,0.756
+DZ_3,N_7_5,hospital_entrance,0.661,256,793,0.876,0.466
+DZ_4,N_0_11,hospital_entrance,0.711,145,627,0.345,0.697
+DZ_5,N_0_10,hospital_entrance,0.632,155,789,0.831,0.413

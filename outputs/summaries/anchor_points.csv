@@ -1,0 +1,6 @@
+anchor_id,node_id,anchor_type,anchor_strength,edge_activity,pedestrian_overlap,allowed_wait_time_min,allowed_wait_time_max
+AP_1,N_0_11,station_edge,0.642,0.945,0.537,10,52
+AP_2,N_10_0,market_entrance,0.741,0.674,0.732,16,43
+AP_3,N_2_0,station_edge,0.64,0.534,0.775,18,77
+AP_4,N_2_3,informal_stand,0.669,0.902,0.444,15,87
+AP_5,N_7_7,market_entrance,0.703,0.764,0.86,24,81
