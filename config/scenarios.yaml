@@ -1,0 +1,30 @@
+scenarios:
+  conventional_baseline:
+    agent_type: conventional_vehicle
+    anchor_strength_multiplier: 0.0
+    demand_multiplier: 0.0
+    curb_accessibility_multiplier: 0.0
+
+  informal_no_anchors:
+    agent_type: informal_transport
+    anchor_strength_multiplier: 0.0
+    demand_multiplier: 1.0
+    curb_accessibility_multiplier: 1.0
+
+  informal_with_anchors:
+    agent_type: informal_transport
+    anchor_strength_multiplier: 1.0
+    demand_multiplier: 1.0
+    curb_accessibility_multiplier: 1.0
+
+  high_pedestrian_intensity:
+    agent_type: informal_transport
+    anchor_strength_multiplier: 1.2
+    demand_multiplier: 1.5
+    curb_accessibility_multiplier: 1.2
+
+  regulation_disruption:
+    agent_type: informal_transport
+    anchor_strength_multiplier: 0.3
+    demand_multiplier: 1.0
+    curb_accessibility_multiplier: 0.4
