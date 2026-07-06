@@ -8,7 +8,7 @@ endpoints that replay generated simulation logs.
 
 Run from the project root with:
 
-uvicorn app.main:app --reload
+python -m uvicorn app.main:app --reload
 
 Then open:
 
@@ -474,6 +474,146 @@ def get_simulation_frame(
         "step": step,
         "agents": agents,
         "state_counts": state_counts.to_dict(orient="records"),
+    }
+
+
+@app.get("/api/simulation/{mode_key}/trails")
+def get_simulation_trails(
+    mode_key: str,
+    step: int = Query(..., ge=0),
+    agent_limit: int = Query(20, ge=1, le=200),
+    sample_every: int = Query(1, ge=1, le=25),
+) -> dict:
+    """
+    Return path trails and event markers up to a selected timestep.
+
+    This powers the exportable simulation image in the browser.
+    """
+
+    try:
+        logs_df = load_mode_log(mode_key)
+    except KeyError as error:
+        raise HTTPException(status_code=404, detail=str(error)) from error
+    except FileNotFoundError as error:
+        raise HTTPException(status_code=404, detail=str(error)) from error
+
+    current_step_df = logs_df[logs_df["step"] == step].copy()
+    selected_agent_ids = (
+        current_step_df.sort_values("agent_id")["agent_id"]
+        .head(agent_limit)
+        .astype(str)
+        .tolist()
+    )
+
+    if not selected_agent_ids:
+        return {
+            "mode_key": mode_key,
+            "step": step,
+            "trails": [],
+            "event_markers": [],
+        }
+
+    logs_until_step_df = logs_df[
+        (logs_df["step"] <= step)
+        & (logs_df["agent_id"].astype(str).isin(selected_agent_ids))
+    ].copy()
+
+    trails = []
+    event_markers = []
+
+    event_states = {
+        "IDLE_AT_ANCHOR",
+        "BOARDING_THRESHOLD",
+        "ALIGHTING_THRESHOLD",
+        "TEMPORARY_PAUSE",
+        "REPAIR_OR_DELAY",
+        "TEMPORARY_STOP",
+        "ARRIVED",
+    }
+
+    for agent_id, agent_logs in logs_until_step_df.groupby("agent_id"):
+        agent_logs = agent_logs.sort_values("step")
+
+        sampled_logs = agent_logs.iloc[::sample_every].copy()
+
+        points = []
+
+        for _, row in sampled_logs.iterrows():
+            points.append(
+                {
+                    "step": int(row["step"]),
+                    "x": float(row["x"]),
+                    "y": float(row["y"]),
+                    "state": str(row["state"]),
+                    "occupancy": float(row.get("occupancy", 0)),
+                }
+            )
+
+        trails.append(
+            {
+                "agent_id": str(agent_id),
+                "points": points,
+            }
+        )
+
+        marker_logs = agent_logs[
+            (
+                agent_logs["state"].astype(str).isin(event_states)
+                | agent_logs["pause_event"]
+                | agent_logs["repair_delay_event"]
+                | agent_logs["threshold_event"]
+                | agent_logs["cycle_completed"]
+            )
+        ].copy()
+
+        previous_marker_key = None
+
+        for _, row in marker_logs.iterrows():
+            marker_key = (
+                str(row["agent_id"]),
+                str(row["current_node"]),
+                str(row["state"]),
+                bool(row.get("threshold_event", False)),
+                bool(row.get("pause_event", False)),
+                bool(row.get("repair_delay_event", False)),
+            )
+
+            if marker_key == previous_marker_key:
+                continue
+
+            previous_marker_key = marker_key
+
+            event_type = str(row["state"])
+
+            if bool(row.get("repair_delay_event", False)):
+                event_type = "REPAIR_OR_DELAY"
+            elif bool(row.get("pause_event", False)):
+                event_type = "TEMPORARY_PAUSE"
+            elif bool(row.get("threshold_event", False)):
+                event_type = str(row["state"])
+
+            event_markers.append(
+                {
+                    "agent_id": str(row["agent_id"]),
+                    "step": int(row["step"]),
+                    "event_type": event_type,
+                    "state": str(row["state"]),
+                    "current_node": str(row["current_node"]),
+                    "x": float(row["x"]),
+                    "y": float(row["y"]),
+                    "occupancy": float(row.get("occupancy", 0)),
+                    "threshold_event": bool(row.get("threshold_event", False)),
+                    "pause_event": bool(row.get("pause_event", False)),
+                    "repair_delay_event": bool(row.get("repair_delay_event", False)),
+                    "cycle_completed": bool(row.get("cycle_completed", False)),
+                }
+            )
+
+    return {
+        "mode_key": mode_key,
+        "step": step,
+        "trails": trails,
+        "event_markers": event_markers,
     }
 
 

@@ -17,7 +17,7 @@
         <h1>Temporal Buildingness Model</h1>
         <p class="subtitle">
           Motion-driven replay of informal transport agents, state transitions,
-          and live Temporal Buildingness Index components.
+          path traces, stop events, and live Temporal Buildingness Index components.
         </p>
       </div>
 
@@ -60,6 +60,31 @@
           <strong id="agentLimitValue">20</strong>
         </div>
 
+        <div class="toggle-group">
+          <label class="checkbox-line">
+            <input type="checkbox" id="showTrails" checked />
+            <span>Show agent paths</span>
+          </label>
+
+          <label class="checkbox-line">
+            <input type="checkbox" id="showEvents" checked />
+            <span>Show stops / thresholds / repairs</span>
+          </label>
+        </div>
+
+        <label for="trailSample">Path detail</label>
+        <select id="trailSample">
+          <option value="1" selected>High detail</option>
+          <option value="2">Medium detail</option>
+          <option value="5">Light detail</option>
+          <option value="10">Very light detail</option>
+        </select>
+
+        <div class="control-row">
+          <button id="exportButton" class="primary-button">Export Image</button>
+          <button id="clearPathButton" class="secondary-button">Hide Paths</button>
+        </div>
+
         <div class="mode-card">
           <h3>Mode Information</h3>
           <dl id="modeInfo"></dl>
@@ -71,17 +96,41 @@
           <div>
             <h2>Agent-Based Motion Viewer</h2>
             <p>
-              Agents are drawn on the synthetic 12 × 12 street graph. Color shows state;
-              size increases with occupancy.
+              Agents are drawn on the synthetic 12 × 12 street graph. Paths show
+              cumulative movement. Event markers show anchoring, boarding, alighting,
+              temporary pauses, repair/delay, and completed rhythm cycles.
             </p>
           </div>
         </div>
 
         <div class="canvas-wrap">
-          <canvas id="simulationCanvas" width="900" height="650"></canvas>
+          <canvas id="simulationCanvas" width="1100" height="760"></canvas>
         </div>
 
-        <div class="legend" id="stateLegend"></div>
+        <div class="legend-block">
+          <h3>State Legend</h3>
+          <div class="legend" id="stateLegend"></div>
+
+          <h3>Event Marker Legend</h3>
+          <div class="legend event-legend">
+            <div class="legend-item">
+              <span class="marker-symbol marker-square"></span>
+              <span>Threshold / boarding / alighting</span>
+            </div>
+            <div class="legend-item">
+              <span class="marker-symbol marker-triangle"></span>
+              <span>Temporary pause / stop</span>
+            </div>
+            <div class="legend-item">
+              <span class="marker-symbol marker-diamond"></span>
+              <span>Repair or delay</span>
+            </div>
+            <div class="legend-item">
+              <span class="marker-symbol marker-ring"></span>
+              <span>Anchor / cycle relation</span>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="metrics-panel panel">

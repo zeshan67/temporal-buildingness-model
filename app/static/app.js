@@ -10,7 +10,11 @@ const state = {
   timerId: null,
   playbackDelay: 350,
   agentLimit: 20,
+  trailSample: 1,
+  showTrails: true,
+  showEvents: true,
   frameData: null,
+  trailData: null,
   liveData: null,
   summaryRows: [],
 };
@@ -25,6 +29,11 @@ const elements = {
   speedSelect: document.getElementById("speedSelect"),
   agentLimit: document.getElementById("agentLimit"),
   agentLimitValue: document.getElementById("agentLimitValue"),
+  showTrails: document.getElementById("showTrails"),
+  showEvents: document.getElementById("showEvents"),
+  trailSample: document.getElementById("trailSample"),
+  exportButton: document.getElementById("exportButton"),
+  clearPathButton: document.getElementById("clearPathButton"),
   modeInfo: document.getElementById("modeInfo"),
   canvas: document.getElementById("simulationCanvas"),
   stateLegend: document.getElementById("stateLegend"),
@@ -91,7 +100,9 @@ async function initializeApp() {
   } catch (error) {
     console.error(error);
     setServerStatus("Error", "error");
-    alert("Could not initialize the app. Make sure the mode comparison runner has already generated the event logs.");
+    alert(
+      "Could not initialize the app. Make sure the mode comparison runner has already generated the event logs."
+    );
   }
 }
 
@@ -140,6 +151,7 @@ async function loadSelectedMode(modeKey) {
 
   state.selectedModeKey = modeKey;
   state.currentStep = 0;
+  state.trailData = null;
 
   const metadata = await fetchJson(`/api/simulation/${modeKey}/metadata`);
 
@@ -188,14 +200,17 @@ function renderModeInfo(metadata) {
 async function updateFrame() {
   const frameUrl = `/api/simulation/${state.selectedModeKey}/frame?step=${state.currentStep}&agent_limit=${state.agentLimit}`;
   const liveUrl = `/api/simulation/${state.selectedModeKey}/live?step=${state.currentStep}`;
+  const trailsUrl = `/api/simulation/${state.selectedModeKey}/trails?step=${state.currentStep}&agent_limit=${state.agentLimit}&sample_every=${state.trailSample}`;
 
-  const [frameResponse, liveResponse] = await Promise.all([
+  const [frameResponse, liveResponse, trailResponse] = await Promise.all([
     fetchJson(frameUrl),
     fetchJson(liveUrl),
+    fetchJson(trailsUrl),
   ]);
 
   state.frameData = frameResponse;
   state.liveData = liveResponse;
+  state.trailData = trailResponse;
 
   elements.stepSlider.value = state.currentStep;
   elements.stepValue.textContent = state.currentStep;
@@ -206,13 +221,13 @@ async function updateFrame() {
 }
 
 function graphToCanvasX(x) {
-  const padding = 44;
+  const padding = 58;
   const usableWidth = elements.canvas.width - padding * 2;
   return padding + (x / 11) * usableWidth;
 }
 
 function graphToCanvasY(y) {
-  const padding = 44;
+  const padding = 58;
   const usableHeight = elements.canvas.height - padding * 2;
   return elements.canvas.height - padding - (y / 11) * usableHeight;
 }
@@ -222,7 +237,17 @@ function drawSimulation() {
 
   drawCanvasBackground();
   drawGraphEdges();
+
+  if (state.showTrails) {
+    drawAgentTrails();
+  }
+
+  if (state.showEvents) {
+    drawEventMarkers();
+  }
+
   drawAgents();
+  drawCanvasTitle();
 }
 
 function drawCanvasBackground() {
@@ -260,6 +285,134 @@ function drawGraphEdges() {
   });
 }
 
+function getAgentTrailColor(agentId) {
+  const numberPart = Number(String(agentId).replace(/\D/g, "")) || 1;
+  const hue = (numberPart * 43) % 360;
+  return `hsla(${hue}, 82%, 64%, 0.42)`;
+}
+
+function drawAgentTrails() {
+  const trails = state.trailData?.trails || [];
+
+  trails.forEach((trail) => {
+    const points = trail.points || [];
+
+    if (points.length < 2) {
+      return;
+    }
+
+    ctx.beginPath();
+
+    points.forEach((point, index) => {
+      const x = graphToCanvasX(point.x);
+      const y = graphToCanvasY(point.y);
+
+      if (index === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
+    });
+
+    ctx.strokeStyle = getAgentTrailColor(trail.agent_id);
+    ctx.lineWidth = 2.2;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.stroke();
+
+    const firstPoint = points[0];
+    const lastPoint = points[points.length - 1];
+
+    drawSmallTrailEndpoint(firstPoint, "rgba(255,255,255,0.38)");
+    drawSmallTrailEndpoint(lastPoint, "rgba(125,211,252,0.90)");
+  });
+}
+
+function drawSmallTrailEndpoint(point, color) {
+  const x = graphToCanvasX(point.x);
+  const y = graphToCanvasY(point.y);
+
+  ctx.beginPath();
+  ctx.arc(x, y, 3.5, 0, Math.PI * 2);
+  ctx.fillStyle = color;
+  ctx.fill();
+}
+
+function drawEventMarkers() {
+  const markers = state.trailData?.event_markers || [];
+
+  markers.forEach((marker) => {
+    const x = graphToCanvasX(marker.x);
+    const y = graphToCanvasY(marker.y);
+
+    if (marker.event_type === "REPAIR_OR_DELAY") {
+      drawDiamondMarker(x, y, "#BDB32A");
+    } else if (
+      marker.event_type === "TEMPORARY_PAUSE" ||
+      marker.event_type === "TEMPORARY_STOP"
+    ) {
+      drawTriangleMarker(x, y, "#FBBF24");
+    } else if (
+      marker.event_type === "BOARDING_THRESHOLD" ||
+      marker.event_type === "ALIGHTING_THRESHOLD"
+    ) {
+      drawSquareMarker(x, y, "#EB5757");
+    } else if (
+      marker.event_type === "IDLE_AT_ANCHOR" ||
+      marker.cycle_completed
+    ) {
+      drawRingMarker(x, y, "#7DD3FC");
+    }
+  });
+}
+
+function drawSquareMarker(x, y, color) {
+  ctx.save();
+  ctx.fillStyle = "rgba(255,255,255,0.82)";
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.fillRect(x - 5, y - 5, 10, 10);
+  ctx.strokeRect(x - 5, y - 5, 10, 10);
+  ctx.restore();
+}
+
+function drawTriangleMarker(x, y, color) {
+  ctx.save();
+  ctx.beginPath();
+  ctx.moveTo(x, y - 7);
+  ctx.lineTo(x + 7, y + 6);
+  ctx.lineTo(x - 7, y + 6);
+  ctx.closePath();
+  ctx.fillStyle = color;
+  ctx.fill();
+  ctx.strokeStyle = "rgba(0,0,0,0.65)";
+  ctx.lineWidth = 1;
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawDiamondMarker(x, y, color) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(Math.PI / 4);
+  ctx.fillStyle = color;
+  ctx.strokeStyle = "rgba(0,0,0,0.65)";
+  ctx.lineWidth = 1;
+  ctx.fillRect(-6, -6, 12, 12);
+  ctx.strokeRect(-6, -6, 12, 12);
+  ctx.restore();
+}
+
+function drawRingMarker(x, y, color) {
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(x, y, 10, 0, Math.PI * 2);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  ctx.restore();
+}
+
 function drawAgents() {
   const agents = state.frameData?.agents || [];
 
@@ -291,7 +444,32 @@ function drawAgents() {
       ctx.lineWidth = 1.2;
       ctx.stroke();
     }
+
+    ctx.fillStyle = "rgba(255,255,255,0.82)";
+    ctx.font = "10px sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText(agent.agent_id.replace("IT_", ""), x, y - radius - 8);
   });
+}
+
+function drawCanvasTitle() {
+  const selectedMode = state.modes.find(
+    (mode) => mode.mode_key === state.selectedModeKey
+  );
+
+  const title = selectedMode ? selectedMode.label : state.selectedModeKey;
+
+  ctx.save();
+  ctx.fillStyle = "rgba(244,246,251,0.92)";
+  ctx.font = "bold 18px sans-serif";
+  ctx.textAlign = "left";
+  ctx.fillText(title, 24, 32);
+
+  ctx.fillStyle = "rgba(167,173,189,0.95)";
+  ctx.font = "13px sans-serif";
+  ctx.fillText(`Step ${state.currentStep} / ${state.maxStep}`, 24, 52);
+
+  ctx.restore();
 }
 
 function renderLiveMetrics() {
@@ -436,7 +614,8 @@ function renderSummaryTable() {
   if (!state.summaryRows.length) {
     const row = elements.summaryTable.insertRow();
     const cell = row.insertCell();
-    cell.textContent = "No summary data found. Run python src/simulation/mode_comparison_runner.py first.";
+    cell.textContent =
+      "No summary data found. Run python src/simulation/mode_comparison_runner.py first.";
     return;
   }
 
@@ -530,6 +709,27 @@ function resetPlayback() {
   updateFrame();
 }
 
+function exportCanvasImage() {
+  pausePlayback();
+
+  drawSimulation();
+
+  const selectedMode = state.modes.find(
+    (mode) => mode.mode_key === state.selectedModeKey
+  );
+
+  const label = selectedMode
+    ? selectedMode.label.replaceAll(" ", "_").replaceAll("—", "-").replaceAll("/", "-")
+    : state.selectedModeKey;
+
+  const filename = `temporal_buildingness_${label}_step_${state.currentStep}.png`;
+
+  const link = document.createElement("a");
+  link.download = filename;
+  link.href = elements.canvas.toDataURL("image/png");
+  link.click();
+}
+
 elements.modeSelect.addEventListener("change", async (event) => {
   await loadSelectedMode(event.target.value);
 });
@@ -561,6 +761,33 @@ elements.agentLimit.addEventListener("input", async (event) => {
   state.agentLimit = Number(event.target.value);
   elements.agentLimitValue.textContent = state.agentLimit;
   await updateFrame();
+});
+
+elements.trailSample.addEventListener("change", async (event) => {
+  state.trailSample = Number(event.target.value);
+  await updateFrame();
+});
+
+elements.showTrails.addEventListener("change", () => {
+  state.showTrails = elements.showTrails.checked;
+  drawSimulation();
+});
+
+elements.showEvents.addEventListener("change", () => {
+  state.showEvents = elements.showEvents.checked;
+  drawSimulation();
+});
+
+elements.clearPathButton.addEventListener("click", () => {
+  state.showTrails = false;
+  state.showEvents = false;
+  elements.showTrails.checked = false;
+  elements.showEvents.checked = false;
+  drawSimulation();
+});
+
+elements.exportButton.addEventListener("click", () => {
+  exportCanvasImage();
 });
 
 window.addEventListener("resize", () => {
