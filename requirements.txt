@@ -8,3 +8,4 @@ jupyter
 ipykernel
 fastapi
 uvicorn
+uvicorn[standard]
