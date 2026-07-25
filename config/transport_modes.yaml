@@ -295,3 +295,35 @@ transport_modes:
       curb_accessibility_multiplier: 0.90
       anchor_strength_multiplier: 0.70
       regulation_pressure: 0.70
+
+      FormalBus_Boundary:
+    display_name: "Formal Bus"
+    city: "Boundary Case"
+    country: "-"
+    movement_family: "route_based_collective"
+
+    max_speed: 10.0
+    slow_speed: 4.0
+    capacity: 40
+
+    threshold_duration_min: 3
+    threshold_duration_max: 8
+
+    anchor_preference: 0.95
+    demand_sensitivity: 0.20
+    curb_sensitivity: 0.25
+    waiting_tendency: 0.85
+    stop_flexibility: 0.03
+    route_formality: 0.98
+    terminal_dependence: 0.95
+
+    enclosure_factor: 0.95
+    edge_coupling_tendency: 0.20
+    repair_delay_probability: 0.02
+
+    context:
+      pedestrian_intensity_multiplier: 0.80
+      congestion_multiplier: 0.90
+      curb_accessibility_multiplier: 0.60
+      anchor_strength_multiplier: 1.40
+      regulation_pressure: 0.85
