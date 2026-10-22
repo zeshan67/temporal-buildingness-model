@@ -296,7 +296,7 @@ transport_modes:
       anchor_strength_multiplier: 0.70
       regulation_pressure: 0.70
 
-      FormalBus_Boundary:
+  FormalBus_Boundary:
     display_name: "Formal Bus"
     city: "Boundary Case"
     country: "-"
