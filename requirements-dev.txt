@@ -1,0 +1,5 @@
+# Development only: notebooks and tests
+-r requirements.txt
+pytest==9.1.1
+jupyter
+ipykernel

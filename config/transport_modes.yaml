@@ -1,3 +1,10 @@
+# Transport mode archetypes.
+# City and country fields record where parameter evidence came from (provenance),
+# not empirical claims about those cities.
+# The per-mode `context` blocks are v1.0 only (used by legacy/reproduce_v1_0.py).
+# From v1.1 they are NOT read: context is a shared experimental factor set in
+# config/contexts.yaml and applied identically to every mode.
+
 transport_modes:
 
   Rickshaw_Dhaka:
@@ -296,7 +303,7 @@ transport_modes:
       anchor_strength_multiplier: 0.70
       regulation_pressure: 0.70
 
-      FormalBus_Boundary:
+  FormalBus_Boundary:
     display_name: "Formal Bus"
     city: "Boundary Case"
     country: "-"

@@ -1,0 +1,35 @@
+# Urban context levels (v1.1).
+#
+# Context is an experimental factor applied to the shared environment, never to a
+# transport mode. Every mode runs in the same context within a comparison.
+# Multipliers scale the synthetic edge attributes of the street graph; values are
+# capped to [0, 1]. Demand zones and anchor points are then derived from the
+# context-adjusted graph, so they are identical for all modes at a given seed.
+#
+# "medium" is the neutral default used for the main mode comparison.
+# "low" / "high" are used only in the context experiment (Step 14); their
+# magnitudes are provisional and are fixed in docs/hypotheses.md before that run.
+
+default_context: medium
+
+contexts:
+  low:
+    pedestrian_intensity: 0.75
+    street_edge_activity: 0.75
+    congestion_level: 0.75
+    curb_accessibility: 0.75
+    anchor_probability: 0.75
+
+  medium:
+    pedestrian_intensity: 1.0
+    street_edge_activity: 1.0
+    congestion_level: 1.0
+    curb_accessibility: 1.0
+    anchor_probability: 1.0
+
+  high:
+    pedestrian_intensity: 1.25
+    street_edge_activity: 1.25
+    congestion_level: 1.25
+    curb_accessibility: 1.25
+    anchor_probability: 1.25

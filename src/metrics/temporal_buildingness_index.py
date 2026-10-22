@@ -257,7 +257,20 @@ def calculate_tbi_for_log_file(
         raise FileNotFoundError(f"Log file not found: {log_path}")
 
     logs_df = pd.read_csv(log_path)
-    logs_df = prepare_log_columns(logs_df)
+
+    return calculate_tbi_for_logs(logs_df, scenario_name, weights)
+
+
+def calculate_tbi_for_logs(
+    logs_df: pd.DataFrame,
+    scenario_name: str,
+    weights: dict,
+) -> pd.DataFrame:
+    """
+    Calculate TBI for all agents in an in-memory event log.
+    """
+
+    logs_df = prepare_log_columns(logs_df.copy())
 
     agent_scores = []
 
